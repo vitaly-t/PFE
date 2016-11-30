@@ -1,7 +1,9 @@
 # PFE
-depuis le terminal,
-aller dans le repertoire PFE,
--pour acceder à la base -> psql lalanne
+
+
+Pour lancer le serveur :
+aller dans PFE/PFE/node-postgres-promises et faire npm start
+
 
 Commandes git :
 1. git status
@@ -10,7 +12,15 @@ Commandes git :
 4. git push // va nous demander de nous identifier
 
 
+Pour acceder à la base -> psql pfe
 \dt pour lister les tables de la base
 \h pour l'aide
 \d <table> structure d'une table
 \q pour quitter
+
+
+
+
+-> penser a changer les config pour que ça soit une appli web et pas dev
+-> penser a faire des requetes sql preparees pour eviter les injections (voir mail francois)
+-> voir les données de carole
