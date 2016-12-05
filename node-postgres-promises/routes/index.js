@@ -1,11 +1,14 @@
 var express = require('express');
 var router = express.Router();
 
+var multer = require('multer');
+var upload = multer({ dest:'uploads/'});
+
 var db = require('../queries');
 
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'LUL' });
+  res.sendFile('index.html');
 });
 
 router.get('/api/patients', db.getAllPatients);
@@ -20,6 +23,11 @@ router.get('/api/placements', db.getAllPlacements);
 router.get('/api/capteurs', db.getAllCapteurs);
 router.get('/api/deploiements', db.getAllDeploiements);
 router.get('/api/donnees', db.getAllDonnees);
+
+router.post('/upload', upload.single('fichier'), function(req, res) {
+  console.log('salut');
+
+});
 
 
 module.exports = router;

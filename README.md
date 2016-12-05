@@ -3,6 +3,7 @@
 
 Pour lancer le serveur :
 aller dans PFE/PFE/node-postgres-promises et faire npm start
+(pour pouvoir faire le upload : npm install express-fileupload(ou multer?))
 
 
 Commandes git :
