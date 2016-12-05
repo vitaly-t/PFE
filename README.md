@@ -19,9 +19,15 @@ Pour acceder à la base -> psql pfe
 \d <table> structure d'une table
 \q pour quitter
 
+Pour gerer la DB en mode superuser :
+sudo -i -u postgres
+psql
+alter role lalanne with superuser
+
 
 
 
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> penser a faire des requetes sql preparees pour eviter les injections (voir mail francois)
 -> voir les données de carole
+-> utiliser le filefilter de mutler pour l'upload

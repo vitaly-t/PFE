@@ -23,11 +23,7 @@ router.get('/api/placements', db.getAllPlacements);
 router.get('/api/capteurs', db.getAllCapteurs);
 router.get('/api/deploiements', db.getAllDeploiements);
 router.get('/api/donnees', db.getAllDonnees);
-
-router.post('/upload', upload.single('fichier'), function(req, res) {
-  console.log('salut');
-
-});
+router.post('/upload', upload.single('fichier'), db.importDonnees);
 
 
 module.exports = router;

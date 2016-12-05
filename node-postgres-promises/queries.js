@@ -207,6 +207,24 @@ function getAllDonnees(req, res, next) {
     });
 }
 
+function importDonnees(req, res, next) {
+  console.log('File Uploaded');
+  console.log(req.file);
+  db.none('copy donnees from' + '\'\/${path}\'' + 'delimiter \',\' csv',req.file)
+    .then(function () {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'Data Inserted'
+        });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+
+}
+
+
 
 module.exports = {
   getAllPatients: getAllPatients,
@@ -221,4 +239,5 @@ module.exports = {
   getAllCapteurs: getAllCapteurs,
   getAllDeploiements: getAllDeploiements,
   getAllDonnees: getAllDonnees,
+  importDonnees: importDonnees
 };
