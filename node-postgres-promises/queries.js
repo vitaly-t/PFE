@@ -36,7 +36,10 @@ var csvStream = csv.createStream(options);
 
 
 function getAllPatients(req, res, next) {
-  db.any('select * from patients')
+  db.any({
+    name: "getAllPatients",
+    text: "select * from patients"
+  })
     .then(function (data) {
       res.status(200)
         .json({
@@ -52,7 +55,11 @@ function getAllPatients(req, res, next) {
 
 function getSinglePatient(req, res, next) {
   var id_patient = parseInt(req.params.id);
-  db.one('select * from patients where id_patient = $1', id_patient)
+  db.one({
+    name: "getSinglePatient",
+    text: "select * from patients where id_patient = $1",
+    values: [id_patient]
+  })
     .then(function (data) {
       res.status(200)
         .json({
@@ -67,10 +74,12 @@ function getSinglePatient(req, res, next) {
 }
 
 function createPatient(req, res, next) {
-  //req.body.age = parseInt(req.body.age);
-  db.none('insert into patients(nom, prenom, sexe, naissance, pathologie)' +
-      'values(${nom}, ${prenom}, ${sexe}, ${naissance}, ${pathologie})',
-    req.body)
+  console.log(req.body);
+  db.none({
+    name: "createPatient",
+    text: "insert into patients(nom, prenom, sexe, naissance, pathologie) values($1, $2, $3, $4, $5)",
+    values: [req.body.nom, req.body.prenom, req.body.sexe, req.body.naissance, req.body.pathologie]
+  })
     .then(function () {
       res.status(200)
         .json({
@@ -85,9 +94,11 @@ function createPatient(req, res, next) {
 
 
 function updatePatient(req, res, next) {
-  db.none('update patients set nom=$1, prenom=$2, sexe=$3, naissance=$4, pathologie=$5 where id_patient=$6',
-    [req.body.nom, req.body.prenom, req.body.sexe,
-      req.body.naissance,req.body.pathologie, parseInt(req.params.id)])
+  db.none({
+    name: "updatePatient",
+    text: 'update patients set nom=$1, prenom=$2, sexe=$3, naissance=$4, pathologie=$5 where id_patient=$6',
+    values: [req.body.nom, req.body.prenom, req.body.sexe, req.body.naissance,req.body.pathologie, parseInt(req.params.id)]
+  })
     .then(function () {
       res.status(200)
         .json({
@@ -103,7 +114,11 @@ function updatePatient(req, res, next) {
 
 function removePatient(req, res, next) {
   var id_patient = parseInt(req.params.id);
-  db.result('delete from patients where id_patient = $1', id_patient)
+  db.result({
+    name: "removePatient",
+    text: "delete from patients where id_patient = $1",
+    values: [id_patient]
+  })
     .then(function (result) {
       /* jshint ignore:start */
       res.status(200)
@@ -119,7 +134,10 @@ function removePatient(req, res, next) {
 }
 
 function getAllMedecins(req, res, next) {
-  db.any('select * from medecins')
+  db.any({
+    name: "getAllMedecins",
+    text: "select * from medecins"
+  })
     .then(function (data) {
       res.status(200)
         .json({
@@ -134,7 +152,10 @@ function getAllMedecins(req, res, next) {
 }
 
 function getAllSuivis(req, res, next) {
-  db.any('select * from suivis')
+  db.any({
+    name: "getAllSuivis",
+    text: "select * from suivis"
+  })
     .then(function (data) {
       res.status(200)
         .json({
@@ -149,7 +170,10 @@ function getAllSuivis(req, res, next) {
 }
 
 function getAllMesures(req, res, next) {
-  db.any('select * from mesures')
+  db.any({
+    name: "getAllMesures",
+    text: "select * from mesures"
+  })
     .then(function (data) {
       res.status(200)
         .json({
@@ -164,7 +188,10 @@ function getAllMesures(req, res, next) {
 }
 
 function getAllPlacements(req, res, next) {
-  db.any('select * from placements')
+  db.any({
+    name: "getAllPlacements",
+    text: "select * from placements"
+  })
     .then(function (data) {
       res.status(200)
         .json({
@@ -179,7 +206,10 @@ function getAllPlacements(req, res, next) {
 }
 
 function getAllCapteurs(req, res, next) {
-  db.any('select * from capteurs')
+  db.any({
+    name: "getAllCapteurs",
+    text: "select * from capteurs"
+  })
     .then(function (data) {
       res.status(200)
         .json({
@@ -194,7 +224,10 @@ function getAllCapteurs(req, res, next) {
 }
 
 function getAllDeploiements(req, res, next) {
-  db.any('select * from deploiements')
+  db.any({
+    name: "getAllDeploiements",
+    text: "select * from deploiements"
+  })
     .then(function (data) {
       res.status(200)
         .json({
@@ -210,7 +243,10 @@ function getAllDeploiements(req, res, next) {
 
 
 function getAllDonnees(req, res, next) {
-  db.any('select * from donnees')
+  db.any({
+    name: "getAllDonnees",
+    text: "select * from donnees"
+  })
     .then(function (data) {
       res.status(200)
         .json({
@@ -228,6 +264,9 @@ function importDonnees(req, res, next) {
   console.log('File Uploaded :');
   console.log(req.file);
   console.log('...');
+  if(req.fileValidationError) {
+              return res.end(req.fileValidationError);
+        }
 
     var path = '/home/lalanne/PFE/PFE/node-postgres-promises/' + req.file.path
     console.log('PATH:' + path)
@@ -238,7 +277,11 @@ function importDonnees(req, res, next) {
        .on('data',function(data){
            // outputs an object containing a set of key/value pair representing a line found in the csv file.
            //console.log(data);
-           db.none('insert into donnees values(1,'+ data.temps + ','+ data.x+','+data.y+','+data.z+')');
+           db.none({
+             name: "importDonnees",
+             text: "insert into donnees values(2, $1, $2, $3, $4)",
+             values: [data.temps, data.x, data.y, data.z]
+           });
              /*.then(function () {
                res.status(200)
                  .json({

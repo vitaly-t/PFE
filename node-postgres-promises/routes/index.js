@@ -2,7 +2,15 @@ var express = require('express');
 var router = express.Router();
 
 var multer = require('multer');
-var upload = multer({ dest:'uploads/'});
+var upload = multer({ dest:'uploads/',
+  fileFilter: function (req, file, cb) {
+   if (file.mimetype !== 'text/csv') {
+    req.fileValidationError = 'goes wrong on the mimetype';
+    return cb(null, false, new Error('goes wrong on the mimetype'));
+   }
+   cb(null, true);
+  }
+});
 
 var db = require('../queries');
 
