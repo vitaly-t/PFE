@@ -24,10 +24,16 @@ sudo -i -u postgres
 psql
 alter role lalanne with superuser
 
-
+Pour recreer la base tranquillement
+1. modifier pfe.sql
+2. $ psql -f pfe.sql (penser a ne pas etre entrain d'utiliser la base a ce moment la hahaha)
 
 
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> penser a faire des requetes sql preparees pour eviter les injections (voir mail francois)
--> voir les données de carole
 -> utiliser le filefilter de mutler pour l'upload
+-> supprimer le fichier une fois que les données sont dans la db
+-> faire une jolie interface
+-> faire des graphs des données
+-> faire toutes les fonctions ajout...
+-> gestion des droits

@@ -225,8 +225,9 @@ function getAllDonnees(req, res, next) {
 }
 
 function importDonnees(req, res, next) {
-  console.log('File Uploaded');
+  console.log('File Uploaded :');
   console.log(req.file);
+  console.log('...');
 
     var path = '/home/lalanne/PFE/PFE/node-postgres-promises/' + req.file.path
     console.log('PATH:' + path)
@@ -236,7 +237,7 @@ function importDonnees(req, res, next) {
        })
        .on('data',function(data){
            // outputs an object containing a set of key/value pair representing a line found in the csv file.
-           console.log(data);
+           //console.log(data);
            db.none('insert into donnees values(1,'+ data.temps + ','+ data.x+','+data.y+','+data.z+')');
              /*.then(function () {
                res.status(200)
@@ -251,10 +252,13 @@ function importDonnees(req, res, next) {
        })
        .on('column',function(key,value){
            // outputs the column name associated with the value found
-          console.log('#' + key + ' = ' + value);
+          //console.log('#' + key + ' = ' + value);
            //console.log('# '   + value);
 
        })
+       console.log('File Imported into DB');
+       res.send('File Imported into DB')
+
 
 }
 
