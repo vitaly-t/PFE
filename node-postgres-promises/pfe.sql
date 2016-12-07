@@ -63,7 +63,7 @@ create table deploiements (
 
 create table donnees (
 	id_deploiement int references deploiements,
-	temps time,
+	temps int,
 	x float,
 	y float,
 	z float
@@ -82,6 +82,6 @@ insert into capteurs (type, adresse_physique) values ('accelerometre', '12345');
 insert into capteurs (type, adresse_physique) values ('gyroscope', '1244345');
 insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (2,2,1,50);
 insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (1,2,1,50);
-insert into donnees values (1, '2:10:3',12.6,14.95,33.5);
-insert into donnees values (1, '2:10:4',52.6,14.55,43.5);
-insert into donnees values (1, '2:10:5',52.4,44.55,42.5);
+insert into donnees values (1, 54215,12.6,14.95,33.5);
+insert into donnees values (1, 51234,52.6,14.55,43.5);
+insert into donnees values (1, 23178,52.4,44.55,42.5);
