@@ -30,8 +30,6 @@ Pour recreer la base tranquillement
 
 
 -> penser a changer les config pour que ça soit une appli web et pas dev
--> penser a faire des requetes sql preparees pour eviter les injections (voir mail francois)
--> utiliser le filefilter de mutler pour l'upload
 -> supprimer le fichier une fois que les données sont dans la db
 -> faire une jolie interface
 -> faire des graphs des données

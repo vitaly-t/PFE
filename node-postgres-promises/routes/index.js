@@ -15,8 +15,11 @@ var upload = multer({ dest:'uploads/',
 var db = require('../queries');
 
 
-router.get('/', function(req, res, next) {
+/*router.get('/', function(req, res, next) {
   res.sendFile('index.html');
+});*/
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'LUL' });
 });
 
 router.get('/api/patients', db.getAllPatients);
