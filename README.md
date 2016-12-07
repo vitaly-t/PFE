@@ -28,6 +28,10 @@ Pour recreer la base tranquillement
 1. modifier pfe.sql
 2. $ psql -f pfe.sql (penser a ne pas etre entrain d'utiliser la base a ce moment la hahaha)
 
+Pour compiler stylus en ligne de commande:
+stylus -u nib -w style.styl -o style.css
+
+
 
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db
@@ -35,3 +39,4 @@ Pour recreer la base tranquillement
 -> faire des graphs des données
 -> faire toutes les fonctions ajout...
 -> gestion des droits
+->faire fonctionner stylus correctement

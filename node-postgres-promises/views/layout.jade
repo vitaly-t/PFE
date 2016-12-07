@@ -1,7 +1,15 @@
-doctype html
+doctype html5
 html
   head
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+    header
+       h1 LUL
+     .container
+       .main-content
+         block content
+       .sidebar
+         block sidebar
+     footer
+       p Running on node with Express, Jade and Stylus
