@@ -1,0 +1,16 @@
+faire la visualisation de la base via l'appli
+pour voir les deploiements... 
+quelques pages pour voir les patients etc..
+voir les deploiement
+visualisation des differentes tables 
+voir les donnees d'un certain deploiement, d'un certain patient
+et une fois que c'est fait regarder l'authentification
+visualisation minimale et authentif login mdp
+apres voir qui a le droit de faire quoi en fonction du schema de la base, etc
+voir les roles impliques dans mon systeme voir sur quoi on met le controle d'acces, 
+row level on verra apres, d'abord gerer les tables, qui peut voir quelles tables, etc.
+row level par la suite
+poser les permissions sql sur nos tables... a expliquer dans le rapport la gestion des droits , schema sql
+authentifier les utilisateurs sur la base, creer des roles avec des mots de passe voir le TP sur la gestion des droits
+a chaque acces coté serveur on a login mdp qu'on envoie a la base pour 
+

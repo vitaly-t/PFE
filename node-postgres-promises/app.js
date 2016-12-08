@@ -1,6 +1,5 @@
 var express = require('express')
-  , stylus = require('stylus')
-  , nib = require ('nib');
+
 
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -28,16 +27,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(stylus.middleware(
-  { src: __dirname + 'public',
-    compile : function (str, path) {
-      console.log('COMPILE');
-      return stylus(str)
-        .set('filename', path)
-        .use(nib());
-    }
-    }
-));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);

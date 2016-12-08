@@ -1,19 +1,9 @@
 extends layout
 
 block content
+  h1.page-header Acceuil
   | Bienvenue dans le PFE de Lulu
   form(action='/upload', method='POST', enctype='multipart/form-data')
     | Select a file to upload :
     input(type='file', name='fichier')
     button Upload
-
-
-block sidebar
-  .widget
-    h1 Widget
-    p
-      | Sed auctor neque eu tellus rhoncus ut
-      | eleifend nibh porttitor. Ut in nulla enim.
-    p
-      | Vivamus hendrerit arcu sed erat molestie
-      | vehicula.
