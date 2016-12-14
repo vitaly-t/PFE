@@ -23,6 +23,8 @@ router.get('/importation', function(req, res, next) {
 });
 router.get('/patients', db.patients);
 router.get('/medecins', db.medecins);
+router.get('/suivis', db.suivis);
+router.get('/deploiements', db.deploiements);
 
 
 router.get('/api/patients', db.getAllPatients);

@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1.page-header Déploiements
+  | Quelles mesures ont été réalisées ?
+  .table-responsive
+    table.table.table-striped
+      thead
+        tr
+          th ID
+          th type
+          th Label
+
+      tbody
+        - for (var i = 0; i < max; i++)
+          tr
+            td= tab[i].id
+            td= tab[i].type
+            td= tab[i].label

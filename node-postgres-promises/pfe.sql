@@ -70,7 +70,7 @@ create table donnees (
 );
 
 
-insert into patients (nom,prenom,sexe,naissance, pathologie) values ('Soule', 'Clothilde', 'F', '23-1-1994', 'parkinson');
+insert into patients (nom,prenom,sexe,naissance, pathologie) values ('Soule', 'Clothilde', 'F', '1994-01-23', 'parkinson');
 insert into patients (nom,prenom,sexe,naissance, pathologie) values ('Flores', 'Thelma', 'F', '28-2-1994', 'parkinson');
 insert into patients (nom,prenom,sexe,naissance, pathologie) values ('Friry', 'Anna', 'F', '28-2-1994', 'fracture');
 insert into patients (nom,prenom,sexe,naissance, pathologie) values ('Desmurs', 'Diane', 'F', '23-2-1994', 'fracture');
@@ -94,18 +94,41 @@ insert into suivis (id_medecin,id_patient,debut_traitement,fin_traitement) value
 
 
 insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (1, '2016-2-2 10:24:55', '2016-2-2 10:43:22');
+insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (2, '2016-2-2 10:24:55', '2016-2-2 10:43:22');
+insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (3, '2016-2-2 10:24:55', '2016-2-2 10:43:22');
+insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (4, '2016-2-2 10:24:55', '2016-2-2 10:43:22');
+insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (5, '2016-2-2 10:24:55', '2016-2-2 10:43:22');
+insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (6, '2016-2-2 10:24:55', '2016-2-2 10:43:22');
+
+
+
 insert into placements (label) values ('pied');
 insert into placements (label) values ('genou');
 insert into placements (label) values ('cuisse');
+insert into placements (label) values ('mollet');
+insert into placements (label) values ('bassin');
+insert into placements (label) values ('dos');
+
 insert into capteurs (type, adresse_physique) values ('accelerometre', '12345');
 insert into capteurs (type, adresse_physique) values ('gyroscope', '1244345');
+
 insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (2,2,1,50);
-insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (1,2,1,50);
+insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (1,3,2,50);
+insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (1,5,3,200);
+insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (2,1,4,50);
+insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (1,4,5,200);
+insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (1,4,6,50);
+
 insert into donnees values (1, 54215,12.6,14.95,33.5);
 insert into donnees values (1, 51234,52.6,14.55,43.5);
 insert into donnees values (1, 23178,52.4,44.55,42.5);
 
 
 create view suivis_medecins_patients as
-		select m.nom, m.prenom, s.debut_traitement, s.fin_traitement
-		from medecins m inner join suivis s on (m.id_medecin=s.id_medecin)
+	select s.id_suivi as id_suivi, m.nom as nommed, m.prenom as prenommed, p.nom as nompat, p.prenom as prenompat, s.debut_traitement as d, s.fin_traitement as f
+	from medecins m inner join suivis s on (m.id_medecin=s.id_medecin) inner join patients p on (p.id_patient=s.id_patient);
+
+
+create view vue_deploiement as
+	select d.id_deploiement as id, c.type as type, p.label as label
+	from deploiements d inner join capteurs c on (d.id_capteur=c.id_capteur) inner join placements p on (d.id_placement=p.id_placement);

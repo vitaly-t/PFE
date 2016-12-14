@@ -327,7 +327,7 @@ function medecins(req, res, next) {
   })
     .then(function (data) {
       console.log('Récupération des données medecins')
-      console.log('Nombre de medecinss : ')
+      console.log('Nombre de medecins : ')
       console.log(data.length);
       res.render('medecins', { title: 'LUL', max: data.length, tab: data});
     })
@@ -336,6 +336,38 @@ function medecins(req, res, next) {
     });
 }
 
+
+function suivis(req, res, next) {
+  db.any({
+    name: "getAllSuivis",
+    text: "select * from suivis_medecins_patients"
+  })
+    .then(function (data) {
+      console.log('Récupération des données suivis')
+      console.log('Nombre de suivis : ')
+      console.log(data.length);
+      res.render('suivis', { title: 'LUL', max: data.length, tab: data});
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function deploiements(req, res, next) {
+  db.any({
+    name: "getAllDeploiements",
+    text: "select * from vue_deploiement"
+  })
+    .then(function (data) {
+      console.log('Récupération des données de déploiements')
+      console.log('Nombre de déploiements : ')
+      console.log(data.length);
+      res.render('deploiements', { title: 'LUL', max: data.length, tab: data});
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
 
 
@@ -366,5 +398,7 @@ module.exports = {
   getAllDonnees: getAllDonnees,
   importDonnees: importDonnees,
   patients: patients,
-  medecins: medecins
+  medecins: medecins,
+  suivis: suivis,
+  deploiements: deploiements
 };
