@@ -300,7 +300,7 @@ function importDonnees(req, res, next) {
 
        })
        console.log('File Imported into DB');
-       res.send('File Imported into DB')
+       res.render('upload', { title: 'LUL' })
 }
 
 
