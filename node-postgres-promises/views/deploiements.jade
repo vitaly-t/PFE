@@ -7,13 +7,23 @@ block content
     table.table.table-striped
       thead
         tr
-          th ID
-          th type
-          th Label
+          th ID 
+          th Nom Medecin
+          th Nom Patient
+          th Type capteurs
+          th placements
+          th Fréquence
+          th Début Acquisition
+          th Fin Acquisition
 
       tbody
         - for (var i = 0; i < max; i++)
           tr
-            td= tab[i].id
+            td= tab[i].id_deploiement
+            td= tab[i].nom_medecin
+            td= tab[i].nom_patient
             td= tab[i].type
             td= tab[i].label
+            td= tab[i].frequence
+            td= tab[i].debut_acquisition
+            td= tab[i].fin_acquisition

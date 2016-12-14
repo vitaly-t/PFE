@@ -340,7 +340,7 @@ function medecins(req, res, next) {
 function suivis(req, res, next) {
   db.any({
     name: "getAllSuivis",
-    text: "select * from suivis_medecins_patients"
+    text: "select * from vue_suivis"
   })
     .then(function (data) {
       console.log('Récupération des données suivis')
@@ -370,16 +370,21 @@ function deploiements(req, res, next) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
+function donnees(req, res, next) {
+  db.any({
+    name: "getAllDonnees",
+    text: "select * from donnees"
+  })
+    .then(function (data) {
+      console.log('Récupération des données')
+      console.log('Nombre de donnees : ')
+      console.log(data.length);
+      res.render('donnees', { title: 'LUL', max: data.length, tab: data});
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
 
 
@@ -400,5 +405,6 @@ module.exports = {
   patients: patients,
   medecins: medecins,
   suivis: suivis,
-  deploiements: deploiements
+  deploiements: deploiements,
+  donnees: donnees
 };

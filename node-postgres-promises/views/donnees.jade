@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1.page-header Donnees
+  | Liste des données importées
+  .table-responsive
+    table.table.table-striped
+      thead
+        tr
+          th ID Deploiement
+          th Temps
+          th X
+          th Y
+          th Z
+      tbody
+        - for (var i = 0; i < max; i++)
+          tr
+            td= tab[i].id_deploiement
+            td= tab[i].temps
+            td= tab[i].x
+            td= tab[i].y
+            td= tab[i].z

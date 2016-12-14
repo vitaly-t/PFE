@@ -8,8 +8,8 @@ block content
       thead
         tr
           th ID
-          th Nom medecin
-          th Prenom medecins
+          th Nom Medecin
+          th Prenom Medecin
           th Nom Patient
           th Prenom Patient
           th Début Traitement
@@ -18,9 +18,9 @@ block content
         - for (var i = 0; i < max; i++)
           tr
             td= tab[i].id_suivi
-            td= tab[i].nommed
-            td= tab[i].prenommed
-            td= tab[i].nompat
-            td= tab[i].prenompat
-            td= tab[i].d
-            td= tab[i].f
+            td= tab[i].nom_medecin
+            td= tab[i].prenom_medecin
+            td= tab[i].nom_patient
+            td= tab[i].prenom_patient
+            td= tab[i].debut_traitement
+            td= tab[i].fin_traitement

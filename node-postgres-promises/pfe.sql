@@ -124,11 +124,43 @@ insert into donnees values (1, 51234,52.6,14.55,43.5);
 insert into donnees values (1, 23178,52.4,44.55,42.5);
 
 
-create view suivis_medecins_patients as
-	select s.id_suivi as id_suivi, m.nom as nommed, m.prenom as prenommed, p.nom as nompat, p.prenom as prenompat, s.debut_traitement as d, s.fin_traitement as f
-	from medecins m inner join suivis s on (m.id_medecin=s.id_medecin) inner join patients p on (p.id_patient=s.id_patient);
+create view vue_suivis as
+	select s.id_suivi as id_suivi,
+		m.nom as nom_medecin,
+		m.prenom as prenom_medecin,
+		p.nom as nom_patient,
+		p.prenom as prenom_patient,
+		s.debut_traitement as debut_traitement,
+		s.fin_traitement as fin_traitement
+	from medecins m
+		inner join suivis s on (m.id_medecin=s.id_medecin)
+		inner join patients p on (p.id_patient=s.id_patient);
+
+create view vue_mesures as
+	select m.id_mesure as id_mesure,
+		s.nom_medecin as nom_medecin,
+		s.prenom_medecin as prenom_medecin,
+		s.nom_patient as nom_patient,
+		s.prenom_patient as prenom_patient,
+		m.debut_acquisition as debut_acquisition,
+		m.fin_acquisition as fin_acquisition
+	from mesures m
+		inner join vue_suivis s on (m.id_suivi=s.id_suivi);
+
 
 
 create view vue_deploiement as
-	select d.id_deploiement as id, c.type as type, p.label as label
-	from deploiements d inner join capteurs c on (d.id_capteur=c.id_capteur) inner join placements p on (d.id_placement=p.id_placement);
+	select d.id_deploiement as id_deploiement,
+		m.nom_medecin as nom_medecin,
+		m.prenom_medecin as prenom_medecin,
+		m.nom_patient as nom_patient,
+		m.prenom_patient as prenom_patient,
+		c.type as type,
+		p.label as label,
+		d.frequence as frequence,
+		m.debut_acquisition as debut_acquisition,
+		m.fin_acquisition as fin_acquisition
+	from deploiements d
+		inner join capteurs c on (d.id_capteur=c.id_capteur)
+		inner join placements p on (d.id_placement=p.id_placement)
+		inner join vue_mesures m on (m.id_mesure=d.id_mesure);
