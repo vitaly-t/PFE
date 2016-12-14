@@ -311,11 +311,25 @@ function patients(req, res, next) {
   })
     .then(function (data) {
       console.log('Récupération des données patients')
+      console.log('Nombre de patients : ')
       console.log(data.length);
-      res.render('patients', { title: 'LUL', max: data.length, id:data[1].id_patient,
-      nom: data[1].nom, prenom: data[1].prenom, sexe:data[1].sexe,
-      naissance: data[1].naissance, pathologie: data[1].pathologie, tab: data});
-      //res.render('patients', { title: 'LUL', id1:data[1].id_patient, nom1: data[1].nom});
+      res.render('patients', { title: 'LUL', max: data.length, tab: data});
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+function medecins(req, res, next) {
+  db.any({
+    name: "getAllMedecins",
+    text: "select * from medecins"
+  })
+    .then(function (data) {
+      console.log('Récupération des données medecins')
+      console.log('Nombre de medecinss : ')
+      console.log(data.length);
+      res.render('medecins', { title: 'LUL', max: data.length, tab: data});
     })
     .catch(function (err) {
       return next(err);
@@ -351,5 +365,6 @@ module.exports = {
   getAllDeploiements: getAllDeploiements,
   getAllDonnees: getAllDonnees,
   importDonnees: importDonnees,
-  patients: patients
+  patients: patients,
+  medecins: medecins
 };

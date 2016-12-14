@@ -1,0 +1,22 @@
+extends layout
+
+block content
+  h1.page-header Medecins
+  | Liste des medecins de l'hopital
+  .table-responsive
+    table.table.table-striped
+      thead
+        tr
+          th ID
+          th Nom
+          th Prénom
+          th Service
+          th Spécialité
+      tbody
+        - for (var i = 0; i < max; i++)
+          tr
+            td= tab[i].id_medecin
+            td= tab[i].nom
+            td= tab[i].prenom
+            td= tab[i].service
+            td= tab[i].specialite

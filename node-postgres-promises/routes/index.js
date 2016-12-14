@@ -22,6 +22,7 @@ router.get('/importation', function(req, res, next) {
   res.render('importation', { title: 'LUL' });
 });
 router.get('/patients', db.patients);
+router.get('/medecins', db.medecins);
 
 
 router.get('/api/patients', db.getAllPatients);
