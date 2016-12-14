@@ -37,6 +37,7 @@ stylus -u nib -w style.styl -o style.css
 -> supprimer le fichier une fois que les données sont dans la db
 -> faire une jolie interface
 -> faire des graphs des données
+-> s'occuper du format de la date de naissance
 -> faire toutes les fonctions ajout...
 -> gestion des droits
 ->faire fonctionner stylus correctement

@@ -3,3 +3,37 @@ extends layout
 block content
   h1.page-header Patients
   | Liste des patients traités
+  .table-responsive
+    table.table.table-striped
+      thead
+        tr
+          th ID
+          th Nom
+          th Prénom
+          th Sexe
+          th Naissance
+          th Pathologie
+      tbody
+        tr
+          td= id
+          td= nom
+          td= prenom
+          td= sexe
+          td= naissance
+          td= pathologie
+        tr
+          td 1,002
+          td amet
+          td consectetur
+          td adipiscing
+          td elit
+          td yo
+          
+        - for (var i = 0; i < 2; i++)
+          tr
+            td= id#{i}
+            td= nom#{i}
+            td= prenom#{i}
+            td= sexe#{i}
+            td= naissance#{i}
+            td= pathologie#{i}

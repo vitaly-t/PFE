@@ -301,9 +301,37 @@ function importDonnees(req, res, next) {
        })
        console.log('File Imported into DB');
        res.send('File Imported into DB')
-
-
 }
+
+
+function patients(req, res, next) {
+  db.any({
+    name: "getAllPatients",
+    text: "select * from patients"
+  })
+    .then(function (data) {
+      console.log('Récupération des données patients')
+      console.log(data.length);
+      //res.render('patients', { title: 'LUL', id:data[1].id_patient, nom: data[1].nom, prenom: data[1].prenom, sexe:data[1].sexe, naissance: data[1].naissance, pathologie: data[1].pathologie});
+      res.render('patients', { title: 'LUL', id1:data[1].id_patient, nom1: data[1].nom});
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -320,5 +348,6 @@ module.exports = {
   getAllCapteurs: getAllCapteurs,
   getAllDeploiements: getAllDeploiements,
   getAllDonnees: getAllDonnees,
-  importDonnees: importDonnees
+  importDonnees: importDonnees,
+  patients: patients
 };
