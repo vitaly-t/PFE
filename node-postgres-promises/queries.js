@@ -312,8 +312,10 @@ function patients(req, res, next) {
     .then(function (data) {
       console.log('Récupération des données patients')
       console.log(data.length);
-      //res.render('patients', { title: 'LUL', id:data[1].id_patient, nom: data[1].nom, prenom: data[1].prenom, sexe:data[1].sexe, naissance: data[1].naissance, pathologie: data[1].pathologie});
-      res.render('patients', { title: 'LUL', id1:data[1].id_patient, nom1: data[1].nom});
+      res.render('patients', { title: 'LUL', max: data.length, id:data[1].id_patient,
+      nom: data[1].nom, prenom: data[1].prenom, sexe:data[1].sexe,
+      naissance: data[1].naissance, pathologie: data[1].pathologie, tab: data});
+      //res.render('patients', { title: 'LUL', id1:data[1].id_patient, nom1: data[1].nom});
     })
     .catch(function (err) {
       return next(err);
