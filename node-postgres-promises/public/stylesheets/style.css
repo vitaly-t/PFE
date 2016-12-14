@@ -23,12 +23,6 @@ body {
  */
 .navbar-fixed-top {
   border: 0;
-  font-family: 'Quicksand';
-  color: #fff;
-  text-align: center;
-  background-color: #fa5b4d;
-  border-bottom: 1px solid #df1806;
-  text-shadow: 0px -1px 0px #df1806;
 }
 
 /*
@@ -50,7 +44,7 @@ body {
     padding: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: #ffdab9;
+    background-color: #f5f5f5;
     border-right: 1px solid #eee;
   }
 }
@@ -87,9 +81,6 @@ body {
   }
 }
 .main .page-header {
-  margin-top: 0;
-}
-.main .content {
   margin-top: 0;
 }
 

@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1.page-header Importations
+  form(action='/upload', method='POST', enctype='multipart/form-data')
+    | Selectionez un fichier de données à importer :
+    input(type='file', name='fichier')
+    button Télécharger
