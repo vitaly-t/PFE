@@ -14,7 +14,9 @@ var upload = multer({ dest:'uploads/',
 
 var db = require('../queries');
 
-
+router.get('/login', function(req, res, next) {
+  res.render('login', { title: 'LUL' });
+});
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'LUL' });
 });
