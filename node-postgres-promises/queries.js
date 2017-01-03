@@ -1,21 +1,21 @@
-var promise = require('bluebird');
+promise = require('bluebird');
 
 
-var options = {
+options = {
   // Initialization Options
   promiseLib: promise
 };
 
-var pgp = require('pg-promise')(options);
+pgp = require('pg-promise')(options);
 //var connectionString = 'postgres://localhost:5432/pfe';
-var config = {
+config = {
   host: 'localhost',
   port: 5432,
   database: 'pfe',
   user: 'lalanne',
   password: 'lucie1234'
 }
-var db = pgp(config);
+db = pgp(config);
 
 
 var csv = require('csv-stream');
@@ -34,6 +34,9 @@ var options = {
 
 var csvStream = csv.createStream(options);
 
+function connect (req, res, next){
+  return(db);
+}
 
 function getAllPatients(req, res, next) {
   db.any({
@@ -389,6 +392,7 @@ function donnees(req, res, next) {
 
 
 module.exports = {
+  connect: connect,
   getAllPatients: getAllPatients,
   getSinglePatient: getSinglePatient,
   createPatient: createPatient,

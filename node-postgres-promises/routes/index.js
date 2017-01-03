@@ -12,7 +12,7 @@ var upload = multer({ dest:'uploads/',
   }
 });
 
-var db = require('../queries');
+var dbfct = require('../queries');
 
 router.get('/login', function(req, res, next) {
   res.render('login', { title: 'LUL' });
@@ -23,26 +23,26 @@ router.get('/', function(req, res, next) {
 router.get('/importation', function(req, res, next) {
   res.render('importation', { title: 'LUL' });
 });
-router.get('/patients', db.patients);
-router.get('/medecins', db.medecins);
-router.get('/suivis', db.suivis);
-router.get('/deploiements', db.deploiements);
-router.get('/donnees', db.donnees);
+router.get('/patients', dbfct.patients);
+router.get('/medecins', dbfct.medecins);
+router.get('/suivis', dbfct.suivis);
+router.get('/deploiements', dbfct.deploiements);
+router.get('/donnees', dbfct.donnees);
 
 
-router.get('/api/patients', db.getAllPatients);
-router.get('/api/patients/:id', db.getSinglePatient);
-router.post('/api/patients', db.createPatient);
-router.put('/api/patients/:id', db.updatePatient);
-router.delete('/api/patients/:id', db.removePatient);
-router.get('/api/medecins', db.getAllMedecins);
-router.get('/api/suivis', db.getAllSuivis);
-router.get('/api/mesures', db.getAllMesures);
-router.get('/api/placements', db.getAllPlacements);
-router.get('/api/capteurs', db.getAllCapteurs);
-router.get('/api/deploiements', db.getAllDeploiements);
-router.get('/api/donnees', db.getAllDonnees);
-router.post('/upload', upload.single('fichier'), db.importDonnees);
+router.get('/api/patients', dbfct.getAllPatients);
+router.get('/api/patients/:id', dbfct.getSinglePatient);
+router.post('/api/patients', dbfct.createPatient);
+router.put('/api/patients/:id', dbfct.updatePatient);
+router.delete('/api/patients/:id', dbfct.removePatient);
+router.get('/api/medecins', dbfct.getAllMedecins);
+router.get('/api/mesures', dbfct.getAllMesures);
+router.get('/api/suivis', dbfct.getAllSuivis);
+router.get('/api/placements', dbfct.getAllPlacements);
+router.get('/api/capteurs', dbfct.getAllCapteurs);
+router.get('/api/deploiements', dbfct.getAllDeploiements);
+router.get('/api/donnees', dbfct.getAllDonnees);
+router.post('/upload', upload.single('fichier'), dbfct.importDonnees);
 
 
 module.exports = router;
