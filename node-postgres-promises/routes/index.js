@@ -14,12 +14,25 @@ var upload = multer({ dest:'uploads/',
 
 var dbfct = require('../queries');
 
+function requireLogin (req, res, next) {
+  if (req.session.email) {
+    // User is authenticated, let him in
+    next();
+  } else {
+    // Otherwise, we redirect him to login form
+    res.redirect("/login");
+  }
+}
+
 router.get('/login', function(req, res, next) {
-  res.render('login', { title: 'LUL' });
+  res.render('login', { title: 'LUL', email: req.session.email, error: null });
 });
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'LUL' });
-});
+
+router.post("/login", dbfct.auth);
+
+
+router.get('/',[requireLogin], dbfct.acceuil);
+
 router.get('/importation', function(req, res, next) {
   res.render('importation', { title: 'LUL' });
 });

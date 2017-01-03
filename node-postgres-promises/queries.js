@@ -34,10 +34,6 @@ var options = {
 
 var csvStream = csv.createStream(options);
 
-function connect (req, res, next){
-  return(db);
-}
-
 function getAllPatients(req, res, next) {
   db.any({
     name: "getAllPatients",
@@ -389,10 +385,86 @@ function donnees(req, res, next) {
     });
 }
 
+function acceuil(req, res, next) {
+  req.session.index = (req.session.index || 0) + 1;
+  res.render('index', {title: 'LUL', sessID: req.sessionID, email: req.session.email, index: req.session.index})
+}
+
+function auth(req, res, next){
+  var options = { email: req.body.email, error: null };
+  console.log('Voici nos emails de body et de session :');
+  console.log(req.body.email)
+  console.log(req.session.email);
+
+  if (!req.body.email) {
+    console.log('Email is required')
+    options.error = "Email is required";
+    res.render('login', options);
+
+  } else if (req.body.email == req.session.email) {
+    // User has not changed email, accept it as-is
+    console.log('Notre body et notre session correspondent, on redirige')
+    res.redirect("/");
+
+  } else {
+
+    db.any({
+      name: "getAllSessions",
+      text: "select * from session"
+    })
+      .then(function (data) {
+        console.log('Récupération des sessions actives')
+        console.log('Nombre de sessions : ')
+        console.log(data.length);
+        var found = false;
+        for (var i=0; i<data.length; i++) {
+          var emaili = data[i].email;
+          if (emaili == req.body.email) {
+            console.log('on a le meme email dans notre base, pas possible')
+            err = "User name already used by someone else";
+            found = true;
+            break;
+          }
+        }
+        if (found==false){
+        console.log('On met le nouvel email dans notre session')
+        req.session.email = req.body.email;
+        res.redirect("/");
+        }
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+
+    // Validate if email is free
+    /*req.sessionStore.all(function (err, sessions) {
+      if (!err) {
+        var found = false;
+        for (var i=0; i<sessions.length; i++) {
+          var session = JSON.parse(sessions[i]); // Si les sessions sont stockées en JSON
+          if (session.email == req.body.email) {
+            err = "User name already used by someone else";
+            found = true;
+            break;
+          }
+        }
+      }
+      if (err) {
+        console.log('ERREUR')
+        console.log(err)
+        options.error = ""+err;
+        res.render("login", options);
+      } else {
+        console.log('On met le nouvel email dans notre session')
+        req.session.email = req.body.email;
+        res.redirect("/");
+      }
+    });*/
+  }
+}
 
 
 module.exports = {
-  connect: connect,
   getAllPatients: getAllPatients,
   getSinglePatient: getSinglePatient,
   createPatient: createPatient,
@@ -410,5 +482,7 @@ module.exports = {
   medecins: medecins,
   suivis: suivis,
   deploiements: deploiements,
-  donnees: donnees
+  donnees: donnees,
+  acceuil: acceuil,
+  auth: auth
 };
