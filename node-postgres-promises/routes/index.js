@@ -13,6 +13,7 @@ var upload = multer({ dest:'uploads/',
 });
 
 var dbfct = require('../queries');
+var loginfct = require('../login');
 
 function requireLogin (req, res, next) {
   if (req.session.email) {
@@ -30,7 +31,7 @@ router.get('/login', function(req, res, next) {
   res.render('login', { title: 'LUL', email: req.session.email, error: null });
 });
 
-router.post("/login", dbfct.auth);
+router.post("/login", loginfct.auth);
 
 
 router.get('/',[requireLogin], dbfct.acceuil);

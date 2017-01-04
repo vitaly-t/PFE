@@ -2,3 +2,5 @@ mettre login/password dans une autre bd pour secu et eviter injection sql
 mettre des roles dans la bd
 commencer par faire du controle de trucs general et petit a petit faire du controle ligne par ligne
 apres on implementera les fonctions d'administration et pour l'instant ya que moi (admin) qui peut le faire et apres on delegera aux mecs qui ont le droit de le faire 
+
+il faut creer une nouvelle session si ça correspond pas !
