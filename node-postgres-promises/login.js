@@ -56,11 +56,20 @@ function auth(req, res, next){
           console.log(passwordi)
 
           if (emaili == req.body.email) {
-            console.log('on a déjà cet email dans notre base, pas possible')
-            options.error = "Cet email est déjà utilisé !";
-            found = true;
-            res.render('login', options);
-            break;
+            if(passwordi == req.body.password){
+              console.log('on a déjà cet email et mot de passe dans notre base, ok on redirige')
+              found = true;
+              res.redirect("/");
+              break;
+            }
+            else {
+              console.log('Mot de passe pas OK pour cet email, réessayez')
+              options.error = "Mot de passe pas OK pour cet email, réessayez";
+              found = true;
+              res.render('login', options);
+              break;
+            }
+
           }
         }
 

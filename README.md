@@ -37,6 +37,10 @@ faut-il chiffrer le password ? comment ?
 A FAIRE:
 -> il faut creer une nouvelle session si ça correspond pas !
 -> rajouter email comme attribut dans bd pour faire le lien
+-> si email et password les deux differents, mettre dans la base mais sur une session differente
+-> recuperer la session en fonction du email/password
+
+
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db
 -> faire des graphs des données
