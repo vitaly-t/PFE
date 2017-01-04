@@ -31,11 +31,15 @@ Pour recreer la base tranquillement
 Pour mettre en place la table session :
 psql login < node_modules/connect-pg-simple/table.sql
 
+QUESTIONS:
+faut-il chiffrer le password ? comment ?
+
+A FAIRE:
+-> il faut creer une nouvelle session si ça correspond pas !
+-> rajouter email comme attribut dans bd pour faire le lien
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db
--> faire une jolie interface
 -> faire des graphs des données
 -> s'occuper du format de la date de naissance
 -> faire toutes les fonctions ajout...
 -> gestion des droits
-->faire fonctionner stylus correctement

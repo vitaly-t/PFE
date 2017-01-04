@@ -12,11 +12,12 @@ var upload = multer({ dest:'uploads/',
   }
 });
 
+var apifct = require('../queriesapi');
 var dbfct = require('../queries');
 var loginfct = require('../login');
 
 function requireLogin (req, res, next) {
-  if (req.session.email) {
+  if (req.session.email && req.session.password) {
     // User is authenticated, let him in
     next();
   } else {
@@ -26,16 +27,16 @@ function requireLogin (req, res, next) {
 }
 
 router.get('/login', function(req, res, next) {
-  console.log('DANS GET')
+  console.log('DANS GET: 1.email et 2.password')
   console.log(req.session.email)
-  res.render('login', { title: 'LUL', email: req.session.email, error: null });
+  console.log(req.session.password)
+  res.render('login', { title: 'LUL', email: req.session.email, password: req.session.password, error: null });
 });
 
 router.post("/login", loginfct.auth);
 
 
-router.get('/',[requireLogin], dbfct.acceuil);
-
+router.get('/',[requireLogin], dbfct.accueil);
 router.get('/importation', function(req, res, next) {
   res.render('importation', { title: 'LUL' });
 });
@@ -44,21 +45,22 @@ router.get('/medecins', dbfct.medecins);
 router.get('/suivis', dbfct.suivis);
 router.get('/deploiements', dbfct.deploiements);
 router.get('/donnees', dbfct.donnees);
-
-
-router.get('/api/patients', dbfct.getAllPatients);
-router.get('/api/patients/:id', dbfct.getSinglePatient);
-router.post('/api/patients', dbfct.createPatient);
-router.put('/api/patients/:id', dbfct.updatePatient);
-router.delete('/api/patients/:id', dbfct.removePatient);
-router.get('/api/medecins', dbfct.getAllMedecins);
-router.get('/api/mesures', dbfct.getAllMesures);
-router.get('/api/suivis', dbfct.getAllSuivis);
-router.get('/api/placements', dbfct.getAllPlacements);
-router.get('/api/capteurs', dbfct.getAllCapteurs);
-router.get('/api/deploiements', dbfct.getAllDeploiements);
-router.get('/api/donnees', dbfct.getAllDonnees);
 router.post('/upload', upload.single('fichier'), dbfct.importDonnees);
+
+
+router.get('/api/patients', apifct.getAllPatients);
+router.get('/api/patients/:id', apifct.getSinglePatient);
+router.post('/api/patients', apifct.createPatient);
+router.put('/api/patients/:id', apifct.updatePatient);
+router.delete('/api/patients/:id', apifct.removePatient);
+router.get('/api/medecins', apifct.getAllMedecins);
+router.get('/api/mesures', apifct.getAllMesures);
+router.get('/api/suivis', apifct.getAllSuivis);
+router.get('/api/placements', apifct.getAllPlacements);
+router.get('/api/capteurs', apifct.getAllCapteurs);
+router.get('/api/deploiements', apifct.getAllDeploiements);
+router.get('/api/donnees', apifct.getAllDonnees);
+
 
 
 module.exports = router;

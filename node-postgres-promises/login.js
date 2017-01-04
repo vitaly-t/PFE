@@ -18,19 +18,22 @@ var configlogin = {
 var dblogin = pgp(configlogin);
 
 function auth(req, res, next){
-  var options = { email: req.body.email, error: null };
+  var options = { email: req.body.email, password: req.body.password, error: null };
   console.log('Voici nos emails de 1.body et de 2.session :');
   console.log(req.body.email)
   console.log(req.session.email);
+  console.log('Voici nos passwords de 1.body et de 2.session :');
+  console.log(req.body.password)
+  console.log(req.session.password);
 
-  if (!req.body.email) {
-    console.log('Un email est nécéssaire')
-    options.error = "Un email est nécéssaire";
+  if ((!req.body.email)||(!req.body.password)) {
+    console.log('Un email et un mot de passe sont nécéssaires')
+    options.error = "Un email et un mot de passe sont nécéssaires";
     res.render('login', options);
 
-  } else if (req.body.email == req.session.email) {
+  } else if ((req.body.email == req.session.email)&&(req.body.password == req.session.password)) {
     // User has not changed email, accept it as-is
-    console.log('Nos email de body et de session correspondent, on redirige vers acceuil')
+    console.log('Nos email et mot de passe de body et de session correspondent, on redirige vers accueil')
     res.redirect("/");
 
   } else {
@@ -47,8 +50,11 @@ function auth(req, res, next){
 
         for (var i=0; i<data.length; i++) {
           var emaili = data[i].sess.email;
-          console.log('email de session active : ')
+          var passwordi = data[i].sess.password;
+          console.log('email et password de session active : ')
           console.log(emaili)
+          console.log(passwordi)
+
           if (emaili == req.body.email) {
             console.log('on a déjà cet email dans notre base, pas possible')
             options.error = "Cet email est déjà utilisé !";
@@ -59,8 +65,9 @@ function auth(req, res, next){
         }
 
         if (found==false){
-          console.log('On met le nouvel email dans notre session')
+          console.log('On met les nouveaux identifiants dans notre base session')
           req.session.email = req.body.email;
+          req.session.password = req.body.password;
           res.redirect("/");
         }
       })
