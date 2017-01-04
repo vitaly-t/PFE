@@ -25,6 +25,8 @@ function requireLogin (req, res, next) {
 }
 
 router.get('/login', function(req, res, next) {
+  console.log('DANS GET')
+  console.log(req.session.email)
   res.render('login', { title: 'LUL', email: req.session.email, error: null });
 });
 

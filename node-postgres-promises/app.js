@@ -1,7 +1,5 @@
 var express = require('express')
 
-
-
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -17,7 +15,6 @@ var pgSession = require('connect-pg-simple')(session);
 var app = express();
 
 
-
 // view engine setup
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -26,7 +23,6 @@ app.set('view engine', 'jade');
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 
-
 app.use(bodyParser.json());
 //app.use(bodyParser());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -34,7 +30,7 @@ app.use(cookieParser());
 
 app.use(session({
   store: new pgSession({
-    conString: "postgres://lalanne:lucie1234@localhost:5432/pfe"
+    conString: "postgres://lalanne:lucie1234@localhost:5432/login"
   }),
   secret: 'maclesecrete',
   resave: false,

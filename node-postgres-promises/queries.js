@@ -1,21 +1,30 @@
-promise = require('bluebird');
+var promise = require('bluebird');
 
 
-options = {
+var options = {
   // Initialization Options
   promiseLib: promise
 };
 
-pgp = require('pg-promise')(options);
+var pgp = require('pg-promise')(options);
 //var connectionString = 'postgres://localhost:5432/pfe';
-config = {
+var config = {
   host: 'localhost',
   port: 5432,
   database: 'pfe',
   user: 'lalanne',
   password: 'lucie1234'
 }
-db = pgp(config);
+var db = pgp(config);
+
+var configlogin = {
+  host: 'localhost',
+  port: 5432,
+  database: 'login',
+  user: 'lalanne',
+  password: 'lucie1234'
+}
+var dblogin = pgp(configlogin);
 
 
 var csv = require('csv-stream');
@@ -392,23 +401,23 @@ function acceuil(req, res, next) {
 
 function auth(req, res, next){
   var options = { email: req.body.email, error: null };
-  console.log('Voici nos emails de body et de session :');
+  console.log('Voici nos emails de 1.body et de 2.session :');
   console.log(req.body.email)
   console.log(req.session.email);
 
   if (!req.body.email) {
-    console.log('Email is required')
-    options.error = "Email is required";
+    console.log('Un email est nécéssaire')
+    options.error = "Un email est nécéssaire";
     res.render('login', options);
 
   } else if (req.body.email == req.session.email) {
     // User has not changed email, accept it as-is
-    console.log('Notre body et notre session correspondent, on redirige')
+    console.log('Nos email de body et de session correspondent, on redirige vers acceuil')
     res.redirect("/");
 
   } else {
 
-    db.any({
+    dblogin.any({
       name: "getAllSessions",
       text: "select * from session"
     })
@@ -417,49 +426,31 @@ function auth(req, res, next){
         console.log('Nombre de sessions : ')
         console.log(data.length);
         var found = false;
+
         for (var i=0; i<data.length; i++) {
-          var emaili = data[i].email;
+          var emaili = data[i].sess.email;
+          console.log('email de session active : ')
+          console.log(emaili)
           if (emaili == req.body.email) {
-            console.log('on a le meme email dans notre base, pas possible')
-            err = "User name already used by someone else";
+            console.log('on a déjà cet email dans notre base, pas possible')
+            options.error = "Cet email est déjà utilisé !";
             found = true;
+            res.render('login', options);
             break;
           }
         }
+
         if (found==false){
-        console.log('On met le nouvel email dans notre session')
-        req.session.email = req.body.email;
-        res.redirect("/");
+          console.log('On met le nouvel email dans notre session')
+          req.session.email = req.body.email;
+          res.redirect("/");
         }
       })
+
       .catch(function (err) {
+        console.log(err)
         return next(err);
       });
-
-    // Validate if email is free
-    /*req.sessionStore.all(function (err, sessions) {
-      if (!err) {
-        var found = false;
-        for (var i=0; i<sessions.length; i++) {
-          var session = JSON.parse(sessions[i]); // Si les sessions sont stockées en JSON
-          if (session.email == req.body.email) {
-            err = "User name already used by someone else";
-            found = true;
-            break;
-          }
-        }
-      }
-      if (err) {
-        console.log('ERREUR')
-        console.log(err)
-        options.error = ""+err;
-        res.render("login", options);
-      } else {
-        console.log('On met le nouvel email dans notre session')
-        req.session.email = req.body.email;
-        res.redirect("/");
-      }
-    });*/
   }
 }
 

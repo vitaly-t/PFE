@@ -7,7 +7,7 @@ block body
 		form.form-signin(method='POST')
 			h2.form-signin-heading Please sign in
 			- if (error)
-				p ERREUR
+				p ERREUR :
 				p= error
 			//label.sr-only(for='inputEmail') Email address
 			input#inputEmail.form-control(type='email', name='email', placeholder='Email address', required='', autofocus='', value= email)

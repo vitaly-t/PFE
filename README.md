@@ -29,7 +29,7 @@ Pour recreer la base tranquillement
 2. $ psql -f pfe.sql (penser a ne pas etre entrain d'utiliser la base a ce moment la hahaha)
 
 Pour mettre en place la table session :
-psql pfe < node_modules/connect-pg-simple/table.sql
+psql login < node_modules/connect-pg-simple/table.sql
 
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db
