@@ -57,8 +57,10 @@ function auth(req, res, next){
 
           if (emaili == req.body.email) {
             if(passwordi == req.body.password){
-              console.log('on a déjà cet email et mot de passe dans notre base, ok on redirige')
+              console.log('on a déjà cet email et mot de passe dans notre base, ok on redirige');
               found = true;
+              req.session.email = req.body.email;
+              req.session.password = req.body.password;
               res.redirect("/");
               break;
             }
@@ -69,15 +71,17 @@ function auth(req, res, next){
               res.render('login', options);
               break;
             }
-
           }
         }
 
         if (found==false){
           console.log('On met les nouveaux identifiants dans notre base session')
-          req.session.email = req.body.email;
-          req.session.password = req.body.password;
-          res.redirect("/");
+          req.session.regenerate(function(err) {
+            console.log('je susi dans le callback')
+            req.session.email = req.body.email;
+            req.session.password = req.body.password;
+            res.redirect("/");
+          });
         }
       })
 

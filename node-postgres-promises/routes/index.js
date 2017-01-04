@@ -40,11 +40,11 @@ router.get('/',[requireLogin], dbfct.accueil);
 router.get('/importation', function(req, res, next) {
   res.render('importation', { title: 'LUL' });
 });
-router.get('/patients', dbfct.patients);
-router.get('/medecins', dbfct.medecins);
-router.get('/suivis', dbfct.suivis);
-router.get('/deploiements', dbfct.deploiements);
-router.get('/donnees', dbfct.donnees);
+router.get('/patients',[requireLogin], dbfct.patients);
+router.get('/medecins', [requireLogin],dbfct.medecins);
+router.get('/suivis',[requireLogin], dbfct.suivis);
+router.get('/deploiements', [requireLogin],dbfct.deploiements);
+router.get('/donnees', [requireLogin],dbfct.donnees);
 router.post('/upload', upload.single('fichier'), dbfct.importDonnees);
 
 

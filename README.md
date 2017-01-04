@@ -39,7 +39,8 @@ A FAIRE:
 -> rajouter email comme attribut dans bd pour faire le lien
 -> si email et password les deux differents, mettre dans la base mais sur une session differente
 -> recuperer la session en fonction du email/password
-
+-> un bouton de deconnexion
+-> mettre le bon id deploiement dans l'import
 
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db
