@@ -16,6 +16,8 @@ var configlogin = {
   password: 'lucie1234'
 }
 var dblogin = pgp(configlogin);
+var crypto = require('crypto');
+var secret = 'jaime12legratin$$debroccoli57#'
 
 function auth(req, res, next){
   var options = { user: req.body.user, password: req.body.password, error: null };
@@ -26,6 +28,12 @@ function auth(req, res, next){
   console.log(req.body.password)
   console.log(req.session.password);
   //ici afficher les mdp chiffres pour les changer dans la base
+  var hash = crypto.createHmac('sha256',secret)
+    .update(req.body.password)
+    .digest('hex');
+  console.log('--HASH--')
+  console.log(hash);
+
 
   if ((!req.body.user)||(!req.body.password)) {
     console.log('Un user et un mot de passe sont nécéssaires')
@@ -60,8 +68,10 @@ function auth(req, res, next){
           console.log(useri)
           console.log(passwordi)*/
 
+
+
           if (useri == req.body.user) {
-            if(passwordi == req.body.password){
+            if(passwordi == hash){
               console.log('on a déjà cet user et mot de passe dans notre base, ok on redirige');
               found = true;
               req.session.regenerate(function(err) {
