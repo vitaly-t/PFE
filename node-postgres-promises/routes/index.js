@@ -34,7 +34,16 @@ router.get('/login', function(req, res, next) {
 });
 
 router.post("/login", loginfct.auth);
-
+//router.post("/logout", loginfct.logout);
+router.get('/logout',function(req,res){
+  req.session.destroy(function(err) {
+    if(err) {
+      console.log(err);
+    } else {
+      res.redirect('/login');
+    }
+  });
+});
 
 router.get('/',[requireLogin], dbfct.accueil);
 router.get('/importation', function(req, res, next) {
@@ -46,6 +55,7 @@ router.get('/suivis',[requireLogin], dbfct.suivis);
 router.get('/deploiements', [requireLogin],dbfct.deploiements);
 router.get('/donnees', [requireLogin],dbfct.donnees);
 router.post('/upload', upload.single('fichier'), dbfct.importDonnees);
+
 
 
 router.get('/api/patients', apifct.getAllPatients);

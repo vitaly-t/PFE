@@ -168,3 +168,10 @@ create view vue_deploiement as
 		inner join capteurs c on (d.id_capteur=c.id_capteur)
 		inner join placements p on (d.id_placement=p.id_placement)
 		inner join vue_mesures m on (m.id_mesure=d.id_mesure);
+
+create view vue_login as
+	select email, password
+	from patients
+	union
+	select email, password
+	from medecins;

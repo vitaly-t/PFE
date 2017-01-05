@@ -40,7 +40,7 @@ function auth(req, res, next){
 
     dblogin.any({
       name: "getAllLogin",
-      text: "select email, password from patients"
+      text: "select * from vue_login"
     })
       .then(function (data) {
         console.log('Récupération des login')
@@ -51,9 +51,9 @@ function auth(req, res, next){
         for (var i=0; i<data.length; i++) {
           var emaili = data[i].email;
           var passwordi = data[i].password;
-          console.log('email et password de session active : ')
+          /*console.log('email et password de session active : ')
           console.log(emaili)
-          console.log(passwordi)
+          console.log(passwordi)*/
 
           if (emaili == req.body.email) {
             if(passwordi == req.body.password){
@@ -91,6 +91,16 @@ function auth(req, res, next){
   }
 }
 
+/*function logout(req, res, next){
+  var options = { email: undefined, password: undefined, error: null };
+  req.session.destroy(function(err) {
+    res.render('login', options);
+  });
+  res.render('login', options);
+
+}*/
+
 module.exports = {
   auth: auth
+  //logout: logout
 };
