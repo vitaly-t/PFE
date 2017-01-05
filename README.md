@@ -42,6 +42,9 @@ quelles fonctionnalités faut-il rajouter en plus (ajout et modifications dans l
 pour les roles : med peut voir que ces patients ? tous les patients ? et vice versa ?
 med peut ajouter patients ?
 qui importe les données ? qui voit les données ?
+pourquoi je dois faire 2 fois mon login avant que ça marche ?
+pourquoi l'importation ne se fait pas 2 fois de suite ?
+ou stocker mes login/password ?
 
 A FAIRE:
 -> chiffrer le password dans la BD

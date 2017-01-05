@@ -25,6 +25,7 @@ function auth(req, res, next){
   console.log('Voici nos passwords de 1.body et de 2.session :');
   console.log(req.body.password)
   console.log(req.session.password);
+  //ici afficher les mdp chiffres pour les changer dans la base
 
   if ((!req.body.user)||(!req.body.password)) {
     console.log('Un user et un mot de passe sont nécéssaires')
@@ -46,13 +47,15 @@ function auth(req, res, next){
     })
       .then(function (data) {
         console.log('Récupération des login')
-        console.log('Nombre de sessions : ')
+        console.log('Nombre utilisateurs : ')
         console.log(data.length);
         var found = false;
 
         for (var i=0; i<data.length; i++) {
           var useri = data[i].username;
           var passwordi = data[i].password;
+          /*la il faudrait encrypter notre mot de passe de req.body.password
+          pour pouvoir le comparer à celui de la bd (qu'on aura encrypé)*/
           /*console.log('user et password de session active : ')
           console.log(useri)
           console.log(passwordi)*/
@@ -63,8 +66,8 @@ function auth(req, res, next){
               found = true;
               req.session.regenerate(function(err) {
                 console.log('je susi dans le callback')
-                req.session.user = useri;
-                req.session.password = passwordi;
+                req.session.user = req.body.user;
+                req.session.password = req.body.password; //donc la on passe le mot de passe non crypté pour la session et la connexion a la base
                 config.user=req.session.user
                 config.password=req.session.password
                 res.redirect("/");

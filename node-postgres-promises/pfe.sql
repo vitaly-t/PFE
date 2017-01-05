@@ -86,6 +86,7 @@ insert into medecins (nom,prenom,service,specialite, username, password) values 
 insert into medecins (nom,prenom,service,specialite, username, password) values ('Bontemps', 'Loic', 'pediatrie', 'pediatrie','loic75', 'lolo');
 insert into medecins (nom,prenom,service,specialite, username, password) values ('Gaiddon', 'Tommy', 'neurologie', 'chirurgie','tommy', 'toto');
 insert into medecins (nom,prenom,service,specialite, username, password) values ('David', 'Antoine', 'psychiatrie', 'neurologie','antoine', 'anan');
+insert into medecins (nom,prenom,service,specialite, username, password) values ('Lalanne', 'Lucie', 'psychiatrie', 'neurologie','lalanne', 'lucie1234');
 
 
 insert into suivis (id_medecin,id_patient,debut_traitement,fin_traitement) values (1,2, '2-2-2015', '1-1-2016');
@@ -176,11 +177,20 @@ create view vue_login as
 	select username, password
 	from medecins;
 
-create user patient with inherit password 'patient';
-create user medecin with inherit password 'medecin';
+/*create user patient with inherit password 'patient';
+create user medecin with inherit password 'medecin';*/
+
 grant select on patients to patient;
+grant select, insert on donnees to patient;
+grant select on vue_suivis to patient;
+grant select on vue_deploiement to patient;
+
 grant select on medecins to medecin;
-create user clothilde32 with inherit password 'coco' in role patient;
+grant select, insert on donnees to medecin;
+grant select on vue_suivis to medecin;
+grant select on vue_deploiement to medecin;
+
+/*create user clothilde32 with inherit password 'coco' in role patient;
 create user thelma26 with inherit password 'tete' in role patient;
 create user anna69 with inherit password 'anan' in role patient;
 create user diane69 with inherit password 'didi' in role patient;
@@ -191,3 +201,4 @@ create user theonarvalo with inherit password 'tete' in role medecin;
 create user loic75 with inherit password 'lolo' in role medecin;
 create user tommy with inherit password 'toto' in role medecin;
 create user antoine with inherit password 'anan' in role medecin;
+*/
