@@ -16,7 +16,7 @@ create table medecins (
 	prenom varchar(80),
 	service service,
 	specialite specialite,
-	email varchar(80),
+	username varchar(80),
 	password varchar(80)
 );
 
@@ -27,7 +27,7 @@ create table patients (
 	sexe sexe,
 	naissance date,
 	pathologie pathologie,
-	email varchar(80),
+	username varchar(80),
 	password varchar(80)
 );
 
@@ -74,18 +74,18 @@ create table donnees (
 );
 
 
-insert into patients (nom,prenom,sexe,naissance, pathologie, email, password) values ('Soule', 'Clothilde', 'F', '1994-01-23', 'parkinson', 'clothilde@gmail.com', 'coco');
-insert into patients (nom,prenom,sexe,naissance, pathologie, email, password) values ('Flores', 'Thelma', 'F', '28-2-1994', 'parkinson', 'thelma@gmail.com', 'tete');
-insert into patients (nom,prenom,sexe,naissance, pathologie, email, password) values ('Friry', 'Anna', 'F', '28-2-1994', 'fracture', 'anna@gmail.com', 'anan');
-insert into patients (nom,prenom,sexe,naissance, pathologie, email, password) values ('Desmurs', 'Diane', 'F', '23-2-1994', 'fracture', 'diane@gmail.com', 'didi');
-insert into patients (nom,prenom,sexe,naissance, pathologie, email, password) values ('José', 'Patrik', 'M', '28-2-1924', 'parkinson', 'patrik@gmail.com', 'papa');
-insert into patients (nom,prenom,sexe,naissance, pathologie, email, password) values ('Beaubay', 'Jean-Baptiste', 'M', '23-2-1994', 'parkinson', 'jean@gmail.com', 'jeje');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('Soule', 'Clothilde', 'F', '1994-01-23', 'parkinson', 'clothilde32', 'coco');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('Flores', 'Thelma', 'F', '28-2-1994', 'parkinson', 'thelma26', 'tete');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('Friry', 'Anna', 'F', '28-2-1994', 'fracture', 'anna69', 'anan');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('Desmurs', 'Diane', 'F', '23-2-1994', 'fracture', 'diane69', 'didi');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('José', 'Patrik', 'M', '28-2-1924', 'parkinson', 'patrik', 'papa');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('Beaubay', 'Jean-Baptiste', 'M', '23-2-1994', 'parkinson', 'jean2b', 'jeje');
 
-insert into medecins (nom,prenom,service,specialite, email, password) values ('Dussac', 'Cecile', 'pediatrie', 'chirurgie','cecile@gmail.com', 'cece');
-insert into medecins (nom,prenom,service,specialite, email, password) values ('De Framond', 'Théo', 'interne', 'chirurgie','theo@gmail.com', 'tete');
-insert into medecins (nom,prenom,service,specialite, email, password) values ('Bontemps', 'Loic', 'pediatrie', 'pediatrie','loic@gmail.com', 'lolo');
-insert into medecins (nom,prenom,service,specialite, email, password) values ('Gaiddon', 'Tommy', 'neurologie', 'chirurgie','tommy@gmail.com', 'toto');
-insert into medecins (nom,prenom,service,specialite, email, password) values ('David', 'Antoine', 'psychiatrie', 'neurologie','antoine@gmail.com', 'anan');
+insert into medecins (nom,prenom,service,specialite, username, password) values ('Dussac', 'Cecile', 'pediatrie', 'chirurgie','cecile13', 'cece');
+insert into medecins (nom,prenom,service,specialite, username, password) values ('De Framond', 'Théo', 'interne', 'chirurgie','theonarvalo', 'tete');
+insert into medecins (nom,prenom,service,specialite, username, password) values ('Bontemps', 'Loic', 'pediatrie', 'pediatrie','loic75', 'lolo');
+insert into medecins (nom,prenom,service,specialite, username, password) values ('Gaiddon', 'Tommy', 'neurologie', 'chirurgie','tommy', 'toto');
+insert into medecins (nom,prenom,service,specialite, username, password) values ('David', 'Antoine', 'psychiatrie', 'neurologie','antoine', 'anan');
 
 
 insert into suivis (id_medecin,id_patient,debut_traitement,fin_traitement) values (1,2, '2-2-2015', '1-1-2016');
@@ -170,8 +170,14 @@ create view vue_deploiement as
 		inner join vue_mesures m on (m.id_mesure=d.id_mesure);
 
 create view vue_login as
-	select email, password
+	select username, password
 	from patients
 	union
-	select email, password
+	select username, password
 	from medecins;
+
+create user patient with inherit password 'patient';
+create user medecin with inherit password 'medecin';
+grant select on patients to patient;
+grant select on medecins to medecin;
+create user clothilde32 with inherit password 'coco' in role patient;

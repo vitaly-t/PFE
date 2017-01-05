@@ -31,17 +31,21 @@ Pour recreer la base tranquillement
 Pour mettre en place la table session :
 psql login < node_modules/connect-pg-simple/table.sql
 
+Pour voir la liste des roles :
+\du
+
+
 QUESTIONS:
 faut-il chiffrer le password ? comment ?
+qui aura quels droits exactement ?
+quelles fonctionnalités faut-il rajouter en plus (ajout et modifications dans la base, visualisation des données)?
+pour les roles : med peut voir que ces patients ? tous les patients ? et vice versa ?
+med peut ajouter patients ?
+qui importe les données ? qui voit les données ?
 
 A FAIRE:
--> il faut creer une nouvelle session si ça correspond pas !
--> rajouter email comme attribut dans bd pour faire le lien
--> si email et password les deux differents, mettre dans la base mais sur une session differente
--> recuperer la session en fonction du email/password
--> un bouton de deconnexion
+-> chiffrer le password dans la BD
 -> mettre le bon id deploiement dans l'import
-
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db
 -> faire des graphs des données

@@ -6,14 +6,17 @@ var options = {
   promiseLib: promise
 };
 
+dbuser = 'clothilde'
+dbpassword = 'coco'
+
 var pgp = require('pg-promise')(options);
 //var connectionString = 'postgres://localhost:5432/pfe';
 var config = {
   host: 'localhost',
   port: 5432,
   database: 'pfe',
-  user: 'lalanne',
-  password: 'lucie1234'
+  user: dbuser,
+  password: dbpassword
 }
 var db = pgp(config);
 
@@ -163,7 +166,7 @@ function donnees(req, res, next) {
 
 function accueil(req, res, next) {
   req.session.index = (req.session.index || 0) + 1;
-  res.render('index', {title: 'LUL', sessID: req.sessionID, email: req.session.email, password: req.session.password , index: req.session.index})
+  res.render('index', {title: 'LUL', sessID: req.sessionID, user: req.session.user, password: req.session.password , index: req.session.index})
 }
 
 

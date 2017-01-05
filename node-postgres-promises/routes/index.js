@@ -17,7 +17,7 @@ var dbfct = require('../queries');
 var loginfct = require('../login');
 
 function requireLogin (req, res, next) {
-  if (req.session.email && req.session.password) {
+  if (req.session.user && req.session.password) {
     // User is authenticated, let him in
     next();
   } else {
@@ -27,10 +27,10 @@ function requireLogin (req, res, next) {
 }
 
 router.get('/login', function(req, res, next) {
-  console.log('DANS GET: 1.email et 2.password')
-  console.log(req.session.email)
+  console.log('DANS GET: 1.user et 2.password')
+  console.log(req.session.user)
   console.log(req.session.password)
-  res.render('login', { title: 'LUL', email: req.session.email, password: req.session.password, error: null });
+  res.render('login', { title: 'LUL', user: req.session.user, password: req.session.password, error: null });
 });
 
 router.post("/login", loginfct.auth);

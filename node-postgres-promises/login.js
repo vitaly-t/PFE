@@ -18,22 +18,22 @@ var configlogin = {
 var dblogin = pgp(configlogin);
 
 function auth(req, res, next){
-  var options = { email: req.body.email, password: req.body.password, error: null };
-  console.log('Voici nos emails de 1.body et de 2.session :');
-  console.log(req.body.email)
-  console.log(req.session.email);
+  var options = { user: req.body.user, password: req.body.password, error: null };
+  console.log('Voici nos users de 1.body et de 2.session :');
+  console.log(req.body.user)
+  console.log(req.session.user);
   console.log('Voici nos passwords de 1.body et de 2.session :');
   console.log(req.body.password)
   console.log(req.session.password);
 
-  if ((!req.body.email)||(!req.body.password)) {
-    console.log('Un email et un mot de passe sont nécéssaires')
-    options.error = "Un email et un mot de passe sont nécéssaires";
+  if ((!req.body.user)||(!req.body.password)) {
+    console.log('Un user et un mot de passe sont nécéssaires')
+    options.error = "Un user et un mot de passe sont nécéssaires";
     res.render('login', options);
 
-  } else if ((req.body.email == req.session.email)&&(req.body.password == req.session.password)) {
-    // User has not changed email, accept it as-is
-    console.log('Nos email et mot de passe de body et de session correspondent, on redirige vers accueil')
+  } else if ((req.body.user == req.session.user)&&(req.body.password == req.session.password)) {
+    // User has not changed user, accept it as-is
+    console.log('Nos user et mot de passe de body et de session correspondent, on redirige vers accueil')
     res.redirect("/");
 
   } else {
@@ -49,27 +49,27 @@ function auth(req, res, next){
         var found = false;
 
         for (var i=0; i<data.length; i++) {
-          var emaili = data[i].email;
+          var useri = data[i].username;
           var passwordi = data[i].password;
-          /*console.log('email et password de session active : ')
-          console.log(emaili)
+          /*console.log('user et password de session active : ')
+          console.log(useri)
           console.log(passwordi)*/
 
-          if (emaili == req.body.email) {
+          if (useri == req.body.user) {
             if(passwordi == req.body.password){
-              console.log('on a déjà cet email et mot de passe dans notre base, ok on redirige');
+              console.log('on a déjà cet user et mot de passe dans notre base, ok on redirige');
               found = true;
               req.session.regenerate(function(err) {
                 console.log('je susi dans le callback')
-                req.session.email = emaili;
+                req.session.user = useri;
                 req.session.password = passwordi;
                 res.redirect("/");
               });
               break;
             }
             else {
-              console.log('Mot de passe pas OK pour cet email, réessayez')
-              options.error = "Mot de passe pas OK pour cet email, réessayez";
+              console.log('Mot de passe pas OK pour cet user, réessayez')
+              options.error = "Mot de passe pas OK pour cet user, réessayez";
               found = true;
               res.render('login', options);
               break;
@@ -78,8 +78,8 @@ function auth(req, res, next){
         }
 
         if (found==false){
-          console.log('Votre email est pas dans notre base, réessayez')
-          options.error = "Votre email est pas dans notre base, réessayez";
+          console.log('Votre user est pas dans notre base, réessayez')
+          options.error = "Votre user est pas dans notre base, réessayez";
           res.render('login', options);
         }
       })
@@ -91,14 +91,6 @@ function auth(req, res, next){
   }
 }
 
-/*function logout(req, res, next){
-  var options = { email: undefined, password: undefined, error: null };
-  req.session.destroy(function(err) {
-    res.render('login', options);
-  });
-  res.render('login', options);
-
-}*/
 
 module.exports = {
   auth: auth
