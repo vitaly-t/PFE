@@ -11,7 +11,7 @@ var pgp = require('pg-promise')(options);
 var configlogin = {
   host: 'localhost',
   port: 5432,
-  database: 'login',
+  database: 'pfe',
   user: 'lalanne',
   password: 'lucie1234'
 }
@@ -39,18 +39,18 @@ function auth(req, res, next){
   } else {
 
     dblogin.any({
-      name: "getAllSessions",
-      text: "select * from session"
+      name: "getAllLogin",
+      text: "select email, password from patients"
     })
       .then(function (data) {
-        console.log('Récupération des sessions actives')
+        console.log('Récupération des login')
         console.log('Nombre de sessions : ')
         console.log(data.length);
         var found = false;
 
         for (var i=0; i<data.length; i++) {
-          var emaili = data[i].sess.email;
-          var passwordi = data[i].sess.password;
+          var emaili = data[i].email;
+          var passwordi = data[i].password;
           console.log('email et password de session active : ')
           console.log(emaili)
           console.log(passwordi)
@@ -59,9 +59,12 @@ function auth(req, res, next){
             if(passwordi == req.body.password){
               console.log('on a déjà cet email et mot de passe dans notre base, ok on redirige');
               found = true;
-              req.session.email = req.body.email;
-              req.session.password = req.body.password;
-              res.redirect("/");
+              req.session.regenerate(function(err) {
+                console.log('je susi dans le callback')
+                req.session.email = emaili;
+                req.session.password = passwordi;
+                res.redirect("/");
+              });
               break;
             }
             else {
@@ -75,13 +78,9 @@ function auth(req, res, next){
         }
 
         if (found==false){
-          console.log('On met les nouveaux identifiants dans notre base session')
-          req.session.regenerate(function(err) {
-            console.log('je susi dans le callback')
-            req.session.email = req.body.email;
-            req.session.password = req.body.password;
-            res.redirect("/");
-          });
+          console.log('Votre email est pas dans notre base, réessayez')
+          options.error = "Votre email est pas dans notre base, réessayez";
+          res.render('login', options);
         }
       })
 
