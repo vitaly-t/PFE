@@ -6,12 +6,12 @@ var options = {
   promiseLib: promise
 };
 
-dbuser = 'clothilde'
-dbpassword = 'coco'
+dbuser = 'undefined'
+dbpassword = 'undefined'
 
 var pgp = require('pg-promise')(options);
 //var connectionString = 'postgres://localhost:5432/pfe';
-var config = {
+config = {
   host: 'localhost',
   port: 5432,
   database: 'pfe',

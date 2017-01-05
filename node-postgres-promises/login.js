@@ -34,6 +34,8 @@ function auth(req, res, next){
   } else if ((req.body.user == req.session.user)&&(req.body.password == req.session.password)) {
     // User has not changed user, accept it as-is
     console.log('Nos user et mot de passe de body et de session correspondent, on redirige vers accueil')
+    config.user=req.session.user
+    config.password=req.session.password
     res.redirect("/");
 
   } else {
@@ -63,6 +65,8 @@ function auth(req, res, next){
                 console.log('je susi dans le callback')
                 req.session.user = useri;
                 req.session.password = passwordi;
+                config.user=req.session.user
+                config.password=req.session.password
                 res.redirect("/");
               });
               break;
