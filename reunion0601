@@ -1,0 +1,24 @@
+
+rajouter le row level security pour qu'il puisse voir que lui meme c'est comme un where qui se rajoute tout seul
+pas stocker les password c'est la base ouvrir connexion si c'est le bon mot de passe ou pas
+le medecin cree le patient et lui file les trucs pour qu'il s'authentifier
+med a un grant pour creer des role et donne login et mdp au patient
+administraation medecin partie logique du controle d'acces
+apres on va faire de la visualisation
+pas le droit de modifier mais le droit de tout voir sur soi en mode transparence
+patient voir les donnees et cmt elles sont traites etc
+faire deja un graph simple des donnees qu'on a qui lit le json
+faire une visualisation minimale
+rapport technique parler aussi gestion des droit avec un mode abstrait
+faire le rapport vite car temps de relecture etc.
+en derniere etape si on a du temps on pourra integrer le truc java avec un bouton qui permet de recup le csv
+calcul rapport cyclique et extrait les recepteurs pour analyser la marche rapport cyclique moyen
+comme ça on aura l'aspect traitement des donnees
+pas besoin d'etre portable
+avoir une archive propre avec un truc qui explique comment on l'installe et comment on lance l'appli
+rajouter tout les droits, et la partie visu
+par exemple pouvoir choisir entre voir tous les axes ou seulement un
+soutenance le 26
+jeudi 19 le matin on fait une repet 9h15 expliquer le conteexte mise en perspective description de la realisation techno utilisees architectures difficultes rencontrees etc. mettre l'etat de l'art un peu dans le contexte . voir ou montravail se situe par rapport aux autres trucs deja fait. poser contexte et objectifs, valoriser le travail biblio et on part sur notre proposition. slides a faires avant pendant 4-5 jours.
+le 16 janvier une premiere version du rapport il peut y avoir des trous
+rdv vendredi prochain le 13 a 15h

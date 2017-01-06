@@ -15,8 +15,13 @@ block content
   h4 Mes Médecins :
   - for (var i = 0; i < max; i++)
     cite= tab[i].prenom_medecin
-    cite     
     cite= tab[i].nom_medecin
+    br
+    strong Service :
+    cite= tab[i].service_medecin
+    br
+    strong Spécialité :
+    cite= tab[i].specialite_medecin
     br
     strong Début du traitement :
     cite= tab[i].debut_traitement

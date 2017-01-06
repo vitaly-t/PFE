@@ -172,15 +172,20 @@ function accueil(req, res, next) {
 function profil(req, res, next) {
   db.any({
     name: "getOneSuivis",
-    text: "select * from vue_suivis where username_patient = $1",
-    values: [req.session.user]
+    text: "select * from vue_suivis where username_patient = $1 or username_medecin = $2",
+    values: [req.session.user, req.session.user]
   })
     .then(function (data) {
       console.log('Récupération des données suivis')
       console.log('Nombre de suivis : ')
       console.log(data.length);
       //console.log(data[0].nom_patient)
-      res.render('profil_patient', { title: 'LUL', max: data.length, tab: data});
+      if (req.session.user == data[0].username_patient) {
+        res.render('profil_patient', { title: 'LUL', max: data.length, tab: data});
+      }
+      else {
+        res.render('profil_medecin', { title: 'LUL', max: data.length, tab: data});
+      }
     })
     .catch(function (err) {
       return next(err);
