@@ -16,8 +16,8 @@ var configlogin = {
   password: 'lucie1234'
 }
 var dblogin = pgp(configlogin);
-var crypto = require('crypto');
-var secret = 'jaime12legratin$$debroccoli57#'
+//var crypto = require('crypto');
+//var secret = 'jaime12legratin$$debroccoli57#'
 
 function auth(req, res, next){
   var options = { user: req.body.user, password: req.body.password, error: null };
@@ -28,11 +28,11 @@ function auth(req, res, next){
   console.log(req.body.password)
   console.log(req.session.password);
   //ici afficher les mdp chiffres pour les changer dans la base
-  var hash = crypto.createHmac('sha256',secret)
+  /*var hash = crypto.createHmac('sha256',secret)
     .update(req.body.password)
     .digest('hex');
   console.log('--HASH--')
-  console.log(hash);
+  console.log(hash);*/
 
 
   if ((!req.body.user)||(!req.body.password)) {
@@ -61,17 +61,13 @@ function auth(req, res, next){
 
         for (var i=0; i<data.length; i++) {
           var useri = data[i].username;
-          var passwordi = data[i].password;
-          /*la il faudrait encrypter notre mot de passe de req.body.password
-          pour pouvoir le comparer à celui de la bd (qu'on aura encrypé)*/
+          //var passwordi = data[i].password;
           /*console.log('user et password de session active : ')
           console.log(useri)
           console.log(passwordi)*/
 
-
-
           if (useri == req.body.user) {
-            if(passwordi == hash){
+            /*if(passwordi == hash){
               console.log('on a déjà cet user et mot de passe dans notre base, ok on redirige');
               found = true;
               req.session.regenerate(function(err) {
@@ -90,7 +86,18 @@ function auth(req, res, next){
               found = true;
               res.render('login', options);
               break;
-            }
+            }*/
+            console.log('on a déjà cet user dans notre base, ok on redirige');
+            found = true;
+            req.session.regenerate(function(err) {
+              console.log('je susi dans le callback')
+              req.session.user = req.body.user;
+              req.session.password = req.body.password; //donc la on passe le mot de passe non crypté pour la session et la connexion a la base
+              config.user=req.session.user
+              config.password=req.session.password
+              res.redirect("/");
+            });
+            break;
           }
         }
 
@@ -108,8 +115,19 @@ function auth(req, res, next){
   }
 }
 
+function logout(req, res, next){
+
+  req.session.destroy(function(err) {
+    if(err) {
+      console.log(err);
+    } else {
+      console.log('deconnecté de ma session ! ')
+      res.redirect('/login');
+    }
+  });
+}
 
 module.exports = {
-  auth: auth
-  //logout: logout
+  auth: auth,
+  logout: logout
 };

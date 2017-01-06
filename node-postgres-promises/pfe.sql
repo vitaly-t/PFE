@@ -16,8 +16,7 @@ create table medecins (
 	prenom varchar(80),
 	service service,
 	specialite specialite,
-	username varchar(80),
-	password varchar(80)
+	username varchar(80)
 );
 
 create table patients (
@@ -27,8 +26,7 @@ create table patients (
 	sexe sexe,
 	naissance date,
 	pathologie pathologie,
-	username varchar(80),
-	password varchar(80)
+	username varchar(80)
 );
 
 create table suivis (
@@ -74,19 +72,19 @@ create table donnees (
 );
 
 
-insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('Soule', 'Clothilde', 'F', '1994-01-23', 'parkinson', 'clothilde32', 'e8192a30bbe41fbcfc616f5e116a77b15bbeaa8cb818bf6c1dea2932111554f1');
-insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('Flores', 'Thelma', 'F', '28-2-1994', 'parkinson', 'thelma26', '2c115bb1814f1254cae69474ef425ab01e8853771542072d17e2bc2bf04a562b');
-insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('Friry', 'Anna', 'F', '28-2-1994', 'fracture', 'anna69', '84af474ad74d9cfa3a18251659af0dc56a0d4ff79208063ee16c25bc8481eb85');
-insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('Desmurs', 'Diane', 'F', '23-2-1994', 'fracture', 'diane69', '0bdebf8dbe9ad4254dc2f33eacc19095031f875780c5c2f2878b6a276a7d6b3a');
-insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('José', 'Patrik', 'M', '28-2-1924', 'parkinson', 'patrik', '0575babab6447fe226fbcf6c473c97040e8b913eaf9131af87fb3e5969a8daf8');
-insert into patients (nom,prenom,sexe,naissance, pathologie, username, password) values ('Beaubay', 'Jean-Baptiste', 'M', '23-2-1994', 'parkinson', 'jean2b', 'b13adf0704ab91113336594c5e2ef2e292bd484919e8d18c698b95c5fd6d892a');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('Soule', 'Clothilde', 'F', '1994-01-23', 'parkinson', 'clothilde32');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('Flores', 'Thelma', 'F', '28-2-1994', 'parkinson', 'thelma26');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('Friry', 'Anna', 'F', '28-2-1994', 'fracture', 'anna69');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('Desmurs', 'Diane', 'F', '23-2-1994', 'fracture', 'diane69');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('José', 'Patrik', 'M', '28-2-1924', 'parkinson', 'patrik');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('Beaubay', 'Jean-Baptiste', 'M', '23-2-1994', 'parkinson', 'jean2b');
 
-insert into medecins (nom,prenom,service,specialite, username, password) values ('Dussac', 'Cecile', 'pediatrie', 'chirurgie','cecile13', '31ae19d3969903edcc40b5f12186ab0357074996e63d5154001f9b85da196fe0');
-insert into medecins (nom,prenom,service,specialite, username, password) values ('De Framond', 'Théo', 'interne', 'chirurgie','theonarvalo', '2c115bb1814f1254cae69474ef425ab01e8853771542072d17e2bc2bf04a562b');
-insert into medecins (nom,prenom,service,specialite, username, password) values ('Bontemps', 'Loic', 'pediatrie', 'pediatrie','loic75', '6ab860a7cfab9d68b0ab03978f076372e260d1a3c5addcee09b8afa89ea3d572');
-insert into medecins (nom,prenom,service,specialite, username, password) values ('Gaiddon', 'Tommy', 'neurologie', 'chirurgie','tommy', '0d50651271be7c323d94dad57013a924824e92ad2f674a9a8ae965ce63adce45');
-insert into medecins (nom,prenom,service,specialite, username, password) values ('David', 'Antoine', 'psychiatrie', 'neurologie','antoine', '84af474ad74d9cfa3a18251659af0dc56a0d4ff79208063ee16c25bc8481eb85');
-insert into medecins (nom,prenom,service,specialite, username, password) values ('Lalanne', 'Lucie', 'psychiatrie', 'neurologie','lalanne', 'fc1bcf548211558ce521d9222af5e4d787063da2d6c386b71c121ce3183b5aa7');
+insert into medecins (nom,prenom,service,specialite, username) values ('Dussac', 'Cecile', 'pediatrie', 'chirurgie','cecile13');
+insert into medecins (nom,prenom,service,specialite, username) values ('De Framond', 'Théo', 'interne', 'chirurgie','theonarvalo');
+insert into medecins (nom,prenom,service,specialite, username) values ('Bontemps', 'Loic', 'pediatrie', 'pediatrie','loic75');
+insert into medecins (nom,prenom,service,specialite, username) values ('Gaiddon', 'Tommy', 'neurologie', 'chirurgie','tommy');
+insert into medecins (nom,prenom,service,specialite, username) values ('David', 'Antoine', 'psychiatrie', 'neurologie','antoine');
+insert into medecins (nom,prenom,service,specialite, username) values ('Lalanne', 'Lucie', 'psychiatrie', 'neurologie','lalanne');
 
 
 insert into suivis (id_medecin,id_patient,debut_traitement,fin_traitement) values (1,2, '2-2-2015', '1-1-2016');
@@ -182,10 +180,10 @@ create view vue_deploiement as
 		inner join vue_mesures m on (m.id_mesure=d.id_mesure);
 
 create view vue_login as
-	select username, password
+	select username
 	from patients
 	union
-	select username, password
+	select username
 	from medecins;
 
 /*create user patient with inherit password 'patient';
