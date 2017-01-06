@@ -36,7 +36,6 @@ Pour voir la liste des roles :
 
 
 QUESTIONS:
-faut-il chiffrer le password ? comment ?
 qui aura quels droits exactement ?
 quelles fonctionnalités faut-il rajouter en plus (ajout et modifications dans la base, visualisation des données)?
 pour les roles : med peut voir que ces patients ? tous les patients ? et vice versa ?
@@ -47,7 +46,8 @@ pourquoi l'importation ne se fait pas 2 fois de suite ?
 ou stocker mes login/password ?
 
 A FAIRE:
--> chiffrer le password dans la BD
+-> faire le profil des medecins
+-> mettre les profils patients accessibles que par le patient et le medecin par tout le monde
 -> mettre le bon id deploiement dans l'import
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db

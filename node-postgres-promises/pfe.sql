@@ -95,6 +95,8 @@ insert into suivis (id_medecin,id_patient,debut_traitement,fin_traitement) value
 insert into suivis (id_medecin,id_patient,debut_traitement,fin_traitement) values (3,1, '6-12-2013', '3-8-2016');
 insert into suivis (id_medecin,id_patient,debut_traitement,fin_traitement) values (5,4, '9-4-2012', '2-9-2017');
 insert into suivis (id_medecin,id_patient,debut_traitement,fin_traitement) values (4,4, '13-3-2015', '1-3-2016');
+insert into suivis (id_medecin,id_patient,debut_traitement,fin_traitement) values (6,6, '13-3-2015', '1-3-2016');
+
 
 
 
@@ -104,6 +106,8 @@ insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (3, '2
 insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (4, '2016-2-2 10:24:55', '2016-2-2 10:43:22');
 insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (5, '2016-2-2 10:24:55', '2016-2-2 10:43:22');
 insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (6, '2016-2-2 10:24:55', '2016-2-2 10:43:22');
+insert into mesures (id_suivi, debut_acquisition, fin_acquisition) values (7, '2016-2-2 10:24:55', '2016-2-2 10:43:22');
+
 
 
 
@@ -123,6 +127,8 @@ insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values
 insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (2,1,4,50);
 insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (1,4,5,200);
 insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (1,4,6,50);
+insert into deploiements (id_capteur, id_placement, id_mesure, frequence) values (1,4,7,50);
+
 
 insert into donnees values (1, 54215,12.6,14.95,33.5);
 insert into donnees values (1, 51234,52.6,14.55,43.5);
@@ -133,8 +139,13 @@ create view vue_suivis as
 	select s.id_suivi as id_suivi,
 		m.nom as nom_medecin,
 		m.prenom as prenom_medecin,
+		m.username as username_medecin,
+		m.service as service_medecin,
+		m.specialite as specialite_medecin,
 		p.nom as nom_patient,
 		p.prenom as prenom_patient,
+		p.pathologie as pathologie_patient,
+		p.username as username_patient,
 		s.debut_traitement as debut_traitement,
 		s.fin_traitement as fin_traitement
 	from medecins m

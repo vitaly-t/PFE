@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1.page-header Mon profil
+  h4 Nom :
+  cite= tab[0].nom_patient
+  h4 Prénom :
+  cite= tab[0].prenom_patient
+  h4 Username :
+  cite= tab[0].username_patient
+  hr
+  h4 Pathologie :
+  cite=tab[0].pathologie_patient
+  hr
+  h4 Mes Médecins :
+  - for (var i = 0; i < max; i++)
+    cite= tab[i].prenom_medecin
+    cite     
+    cite= tab[i].nom_medecin
+    br
+    strong Début du traitement :
+    cite= tab[i].debut_traitement
+    br
+    strong Fin du traitement :
+    cite= tab[i].fin_traitement
+    br
+    br
