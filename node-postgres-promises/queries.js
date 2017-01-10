@@ -18,7 +18,7 @@ config = {
   user: dbuser,
   password: dbpassword
 }
-var db = pgp(config);
+db = pgp(config);
 
 
 var csv = require('csv-stream');

@@ -193,11 +193,13 @@ grant select on patients to patient;
 grant select, insert on donnees to patient;
 grant select on vue_suivis to patient;
 grant select on vue_deploiement to patient;
+grant select on vue_login to patient;
 
 grant select on medecins to medecin;
 grant select, insert on donnees to medecin;
 grant select on vue_suivis to medecin;
 grant select on vue_deploiement to medecin;
+grant select on vue_login to medecin;
 
 /*create user clothilde32 with inherit password 'coco' in role patient;
 create user thelma26 with inherit password 'tete' in role patient;

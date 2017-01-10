@@ -40,14 +40,12 @@ qui aura quels droits exactement ?
 quelles fonctionnalités faut-il rajouter en plus (ajout et modifications dans la base, visualisation des données)?
 pour les roles : med peut voir que ces patients ? tous les patients ? et vice versa ?
 med peut ajouter patients ?
-qui importe les données ? qui voit les données ?
 pourquoi je dois faire 2 fois mon login avant que ça marche ?
 pourquoi l'importation ne se fait pas 2 fois de suite ?
-ou stocker mes login/password ?
 
 A FAIRE:
--> faire le profil des medecins
 -> mettre les profils patients accessibles que par le patient et le medecin par tout le monde
+-> modifier conString dans app.js
 -> mettre le bon id deploiement dans l'import
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db
