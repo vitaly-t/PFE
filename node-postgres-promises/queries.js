@@ -197,31 +197,15 @@ function profil(req, res, next) {
 
 function graphiques(req, res, next) {
   var Canvas = require('canvas')
-  , canvas = new Canvas(800, 800)
+  , canvas = new Canvas(600, 450)
   , ctx = canvas.getContext('2d')
   , Chart = require('nchart')
-  , fs = require('fs');
+  , fs = require('fs')
+  , data = require('./line.json')
 
-  new Chart(ctx).Pie(
-      [
-          {
-              "value": 50
-            , "color": "#E2EAE9"
-          }
-        , {
-              "value": 100
-            , "color": "#FF00FF"
-          }
-        , {
-              "value": 40
-            , "color": "#949FB1"
-          }
-      ]
-    , {
-          scaleShowValues: true
-        , scaleFontSize: 24
-      }
-  );
+ctx.fillStyle = '#fff';
+ctx.fillRect(0, 0, canvas.width, canvas.height);
+new Chart(ctx).Line(data);
 
   canvas.toBuffer(function (err, buf) {
     if (err) throw err;
