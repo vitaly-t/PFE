@@ -195,6 +195,41 @@ function profil(req, res, next) {
 
 
 
+function graphiques(req, res, next) {
+  var Canvas = require('canvas')
+  , canvas = new Canvas(800, 800)
+  , ctx = canvas.getContext('2d')
+  , Chart = require('nchart')
+  , fs = require('fs');
+
+  new Chart(ctx).Pie(
+      [
+          {
+              "value": 50
+            , "color": "#E2EAE9"
+          }
+        , {
+              "value": 100
+            , "color": "#FF00FF"
+          }
+        , {
+              "value": 40
+            , "color": "#949FB1"
+          }
+      ]
+    , {
+          scaleShowValues: true
+        , scaleFontSize: 24
+      }
+  );
+
+  canvas.toBuffer(function (err, buf) {
+    if (err) throw err;
+    fs.writeFile(__dirname + '/public'+'/images'+'/pie.png', buf);
+  });
+  res.render('graphiques', {title: 'LUL'});
+}
+
 
 module.exports = {
   importDonnees: importDonnees,
@@ -204,5 +239,6 @@ module.exports = {
   deploiements: deploiements,
   donnees: donnees,
   accueil: accueil,
-  profil: profil
+  profil: profil,
+  graphiques: graphiques
 };

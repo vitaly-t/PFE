@@ -34,6 +34,10 @@ psql login < node_modules/connect-pg-simple/table.sql
 Pour voir la liste des roles :
 \du
 
+Pour se connecter en mode superuser a la base de données :
+user : lalanne
+password : lucie1234
+
 
 QUESTIONS:
 qui aura quels droits exactement ?
@@ -45,7 +49,8 @@ pourquoi l'importation ne se fait pas 2 fois de suite ?
 
 A FAIRE:
 -> mettre les profils patients accessibles que par le patient et le medecin par tout le monde
--> modifier conString dans app.js
+-> modifier conString dans app.js pour sécu !!
+-> gerer les erreurs de maniere plus jolie (acces, connexion...)
 -> mettre le bon id deploiement dans l'import
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db

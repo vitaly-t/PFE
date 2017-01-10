@@ -50,6 +50,7 @@ router.get('/suivis',[requireLogin], dbfct.suivis);
 router.get('/deploiements', [requireLogin],dbfct.deploiements);
 router.get('/donnees', [requireLogin],dbfct.donnees);
 router.post('/upload', upload.single('fichier'), dbfct.importDonnees);
+router.get('/graphiques', [requireLogin],dbfct.graphiques);
 
 
 
