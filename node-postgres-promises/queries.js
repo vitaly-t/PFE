@@ -195,81 +195,6 @@ function profil(req, res, next) {
 
 
 
-function graphiques(req, res, next) {
-  var Canvas = require('canvas')
-  , canvas = new Canvas(4000, 4000)
-  , ctx = canvas.getContext('2d')
-  , Chart = require('nchart')
-  , fs = require('fs')
-
-var datatemps = [], datax = [], datay = [], dataz = [];
-
-  db.any({
-    name: "graphs",
-    text: "select * from donnees where id_deploiement = 2"
-  })
-    .then(function (data) {
-      for (var i = 0; i < data.length; i++){
-        datatemps[i]=data[i].temps
-        datax[i]=data[i].x;
-        datay[i]=data[i].y;
-        dataz[i]=data[i].z
-      }
-
-      var lineChartData = {
-      	labels : datatemps,
-      	datasets : [
-      		{
-      			label: "Accélération X",
-      			fillColor : "rgba(255,51,166,0.2)",
-      			strokeColor : "rgba(255,51,166,1)",
-      			pointColor : "rgba(255,51,166,1)",
-      			pointStrokeColor : "#fff",
-      			pointHighlightFill : "#fff",
-      			pointHighlightStroke : "rgba(255,51,166,1)",
-      			data : datax
-      		},
-      		{
-      			label: "Accélération Y",
-      			fillColor : "rgba(51,157,255,0.2)",
-      			strokeColor : "rgba(51,157,255,1)",
-      			pointColor : "rgba(51,157,255,1)",
-      			pointStrokeColor : "#fff",
-      			pointHighlightFill : "#fff",
-      			pointHighlightStroke : "rgba(51,157,255,1)",
-      			data : datay
-      		},
-          {
-      			label: "Accélération Z",
-      			fillColor : "rgba(242,202,39,0.2)",
-      			strokeColor : "rgba(242,202,39,1)",
-      			pointColor : "rgba(242,202,39,1)",
-      			pointStrokeColor : "#fff",
-      			pointHighlightFill : "#fff",
-      			pointHighlightStroke : "rgba(242,202,39,1)",
-      			data : dataz
-      		}
-      	]
-      }
-
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      new Chart(ctx).Line(lineChartData);
-
-      canvas.toBuffer(function (err, buf) {
-        if (err) throw err;
-        fs.writeFile(__dirname + '/public'+'/images'+'/pie.png', buf);
-      });
-      res.render('graphiques', {title: 'LUL'});
-    })
-
-    .catch(function (err) {
-      return next(err);
-    });
-  }
-
-
-
 
 
 
@@ -281,6 +206,5 @@ module.exports = {
   deploiements: deploiements,
   donnees: donnees,
   accueil: accueil,
-  profil: profil,
-  graphiques: graphiques
+  profil: profil
 };

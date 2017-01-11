@@ -15,6 +15,7 @@ var upload = multer({ dest:'uploads/',
 var apifct = require('../queriesapi');
 var dbfct = require('../queries');
 var loginfct = require('../login');
+var graphfct = require('../graphs')
 
 function requireLogin (req, res, next) {
   if (req.session.user && req.session.password) {
@@ -50,7 +51,8 @@ router.get('/suivis',[requireLogin], dbfct.suivis);
 router.get('/deploiements', [requireLogin],dbfct.deploiements);
 router.get('/donnees', [requireLogin],dbfct.donnees);
 router.post('/upload', upload.single('fichier'), dbfct.importDonnees);
-router.get('/graphiques', [requireLogin],dbfct.graphiques);
+
+router.get('/graphiques', [requireLogin],graphfct.graphiques);
 
 
 
