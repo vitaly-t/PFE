@@ -37,6 +37,7 @@ Pour voir la liste des roles :
 Pour se connecter en mode superuser a la base de données :
 user : lalanne
 password : lucie1234
+donc pas de row level security, vision de toutes les tables
 
 
 QUESTIONS:

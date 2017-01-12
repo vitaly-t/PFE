@@ -203,15 +203,21 @@ create user antoine with inherit password 'anan' in role medecin;
 */
 
 alter table patients enable row level security;
-create policy on patients for select
+create policy row_patients on patients for select
+  USING (current_user = username);
+
+alter table medecins enable row level security;
+create policy row_medecins on medecins for select
   USING (current_user = username);
 
 grant select on patients to patient;
+grant select on medecins to patient;
 grant select, insert on donnees to patient;
 grant select on vue_suivis to patient;
 grant select on vue_deploiement to patient;
 grant select on vue_login to patient;
 
+grant select on patients to medecin;
 grant select on medecins to medecin;
 grant select, insert on donnees to medecin;
 grant select on vue_suivis to medecin;
