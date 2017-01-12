@@ -2,6 +2,24 @@ extends layout
 
 block content
   h1.page-header Graphiques
+  form(action='/graphiques', method='GET')
+    p ID de déploiement :
+    input(type='radio', name='id_deploiement', value=1)
+    | 1
+    input(type='radio', name='id_deploiement', value=2)
+    | 2
+    input(type='radio', name='id_deploiement', value=3)
+    | 3
+    input(type='radio', name='id_deploiement', value=4)
+    | 4
+    input(type='radio', name='id_deploiement', value=5)
+    | 5
+    input(type='radio', name='id_deploiement', value=6)
+    | 6
+    input(type='radio', name='id_deploiement', value=7)
+    | 7
+    br
+    button Choisir
   p ROSE : Accélération en X (axe antéro-postérieur)
   p BLEU : Accélération en Y (axe longitudinal)
   p JAUNE : Accélération en Z (axe transversal)

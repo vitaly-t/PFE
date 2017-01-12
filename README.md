@@ -47,15 +47,14 @@ pour les roles : med peut voir que ces patients ? tous les patients ? et vice ve
 med peut ajouter patients ?
 pourquoi je dois faire 2 fois mon login avant que ça marche ?
 pourquoi l'importation ne se fait pas 2 fois de suite ?
+on ne peut pas faire de row level security sur les vues... du coup on laisse comme ca pour l'instant ?
+il faut faire une démo pour la soutenance ?
 
 A FAIRE:
--> mettre les profils patients accessibles que par le patient et le medecin par tout le monde
--> modifier conString dans app.js pour sécu !!
 -> gerer les erreurs de maniere plus jolie (acces, connexion...)
 -> mettre le bon id deploiement dans l'import
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db
--> faire des graphs des données
 -> s'occuper du format de la date de naissance
 -> faire toutes les fonctions ajout...
 -> gestion des droits

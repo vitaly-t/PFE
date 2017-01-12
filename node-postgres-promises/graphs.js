@@ -11,6 +11,9 @@ function graphiques(req, res, next) {
   , Chart = require('nchart')
   , fs = require('fs')
 
+console.log('ID de déploiement :')
+console.log(req.param("id_deploiement"))
+
 var datatemps = [], datax = [], datay = [], dataz = [];
 var datatemps2 = [], datax2 = [], datay2 = [], dataz2 = [];
 var datatemps3 = [], datax3 = [], datay3 = [], dataz3 = [];
@@ -18,7 +21,8 @@ var datatemps4 = [], datax4 = [], datay4 = [], dataz4 = [];
 
   db.any({
     name: "graphs",
-    text: "select * from donnees where id_deploiement = 2"
+    text: "select * from donnees where id_deploiement = $1",
+    values: [req.param("id_deploiement")]
   })
     .then(function (data) {
       var max = data.length;

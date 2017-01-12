@@ -15,7 +15,8 @@ var upload = multer({ dest:'uploads/',
 var apifct = require('../queriesapi');
 var dbfct = require('../queries');
 var loginfct = require('../login');
-var graphfct = require('../graphs')
+var graphfct = require('../graphs');
+var importfct = require('../import')
 
 function requireLogin (req, res, next) {
   if (req.session.user && req.session.password) {
@@ -28,29 +29,24 @@ function requireLogin (req, res, next) {
 }
 
 router.get('/login', function(req, res, next) {
-  console.log('DANS GET: 1.user et 2.password')
-  console.log(req.session.user)
-  console.log(req.session.password)
   res.render('login', { title: 'LUL', user: req.session.user, password: req.session.password, error: null });
 });
 
 router.post("/login", loginfct.auth);
-//router.post("/logout", loginfct.logout);
 router.get('/logout', loginfct.logout);
 
 router.get('/',[requireLogin], dbfct.accueil);
-
-
-router.get('/importation', function(req, res, next) {
-  res.render('importation', { title: 'LUL' });
-});
 router.get('/profil', [requireLogin], dbfct.profil);
 router.get('/patients',[requireLogin], dbfct.patients);
 router.get('/medecins', [requireLogin],dbfct.medecins);
 router.get('/suivis',[requireLogin], dbfct.suivis);
 router.get('/deploiements', [requireLogin],dbfct.deploiements);
 router.get('/donnees', [requireLogin],dbfct.donnees);
-router.post('/upload', upload.single('fichier'), dbfct.importDonnees);
+
+router.get('/importation', function(req, res, next) {
+  res.render('importation', { title: 'LUL' });
+});
+router.post('/upload', upload.single('fichier'), importfct.importDonnees);
 
 router.get('/graphiques', [requireLogin],graphfct.graphiques);
 
