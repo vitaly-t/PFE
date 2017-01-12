@@ -66,9 +66,9 @@ create table deploiements (
 create table donnees (
 	id_deploiement int references deploiements,
 	temps int,
-	x float,
-	y float,
-	z float
+	x double precision,
+	y double precision,
+	z double precision
 );
 
 

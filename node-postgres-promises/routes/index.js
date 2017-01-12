@@ -42,6 +42,7 @@ router.get('/medecins', [requireLogin],dbfct.medecins);
 router.get('/suivis',[requireLogin], dbfct.suivis);
 router.get('/deploiements', [requireLogin],dbfct.deploiements);
 router.get('/donnees', [requireLogin],dbfct.donnees);
+router.get('/ajout', [requireLogin],dbfct.ajout);
 
 router.get('/importation', function(req, res, next) {
   res.render('importation', { title: 'LUL' });

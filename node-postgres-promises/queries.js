@@ -61,7 +61,7 @@ function medecins(req, res, next) {
 function suivis(req, res, next) {
   db.any({
     name: "getAllSuivis",
-    text: "select * from vue_suivis"
+    text: "select * from vue_suivis",
   })
     .then(function (data) {
       console.log('Récupération des données suivis')
@@ -133,7 +133,10 @@ function profil(req, res, next) {
     .catch(function (err) {
       return next(err);
     });
+}
 
+function ajout(req, res, next) {
+  res.render('ajout', {title: 'LUL'})
 }
 
 
@@ -148,5 +151,6 @@ module.exports = {
   deploiements: deploiements,
   donnees: donnees,
   accueil: accueil,
-  profil: profil
+  profil: profil,
+  ajout: ajout
 };

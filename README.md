@@ -46,15 +46,16 @@ quelles fonctionnalités faut-il rajouter en plus (ajout et modifications dans l
 pour les roles : med peut voir que ces patients ? tous les patients ? et vice versa ?
 med peut ajouter patients ?
 pourquoi je dois faire 2 fois mon login avant que ça marche ?
-pourquoi l'importation ne se fait pas 2 fois de suite ?
+pourquoi l'importation ne se fait pas 2 fois de suite ? --> c'est une histoire de promesses je pense !!
 on ne peut pas faire de row level security sur les vues... du coup on laisse comme ca pour l'instant ?
 il faut faire une démo pour la soutenance ?
 
 A FAIRE:
 -> gerer les erreurs de maniere plus jolie (acces, connexion...)
--> mettre le bon id deploiement dans l'import
+-> faire l'ajout de deploiement
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db
 -> s'occuper du format de la date de naissance
 -> faire toutes les fonctions ajout...
 -> gestion des droits
+-> mettre un delete une fois qu'on charge les données d'un déploiement qui existe deja

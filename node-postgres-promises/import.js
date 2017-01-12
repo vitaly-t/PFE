@@ -40,14 +40,20 @@ function importDonnees(req, res, next) {
              name: "importDonnees",
              text: "insert into donnees values($1, $2, $3, $4, $5)",
              values: [req.body.id_deploiement, data.temps, data.x, data.y, data.z]
+           })
+           .then(function () {
+
+           })
+           .catch(function (err) {
+             return next(err);
            });
 
        })
        .on('column',function(key,value){
            // outputs the column name associated with the value found
           //console.log('#' + key + ' = ' + value);
-
        })
+       
        console.log('File Imported into DB');
        res.render('upload', { title: 'LUL' })
 }
