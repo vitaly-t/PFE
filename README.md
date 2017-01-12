@@ -53,6 +53,7 @@ il faut faire une démo pour la soutenance ?
 A FAIRE:
 -> gerer les erreurs de maniere plus jolie (acces, connexion...)
 -> faire l'ajout de deploiement
+-> finir ajout patient et le SECURISER et creer role, suivis, etc
 -> penser a changer les config pour que ça soit une appli web et pas dev
 -> supprimer le fichier une fois que les données sont dans la db
 -> s'occuper du format de la date de naissance

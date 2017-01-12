@@ -2,4 +2,36 @@ extends layout
 
 block content
   h1.page-header Ajout d'un patient
-  p Formulaire d'ajout d'un nouveau patient
+  p Formulaire d'ajout d'un nouveau patient :
+  form(action='/ajout', method='POST')
+    | Prénom :
+    br
+    input(type='text', name='prenom', value=prenom)
+    br
+    | Nom :
+    br
+    input(type='text', name='nom', value=nom)
+    br
+    | Username :
+    br
+    input(type='text', name='username', value=username)
+    br
+    | Sexe :
+    br
+    input(type='radio', name='sexe', value='M')
+    | M
+    input(type='radio', name='sexe', value='F')
+    | F
+    br
+    | Date de naissance (format: JJ-MM-AAAA):
+    br
+    input(type='text', name='naissance', value=naissance)
+    br
+    | Pathologie :
+    br
+    input(type='radio', name='pathologie', value='parkinson')
+    | Parkinson
+    input(type='radio', name='pathologie', value='fracture')
+    | Fracture
+    br
+    input(type='submit', value='Submit')

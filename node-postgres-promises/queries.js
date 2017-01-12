@@ -136,7 +136,21 @@ function profil(req, res, next) {
 }
 
 function ajout(req, res, next) {
-  res.render('ajout', {title: 'LUL'})
+  console.log(req.body);
+
+  db.none({
+    name: "importPatient",
+    text: "insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ($1, $2, $3, $4, $5, $6);",
+    values: [req.body.nom, req.body.prenom, req.body.sexe, req.body.naissance, req.body.pathologie, req.body.username]
+  })
+  .then(function () {
+    res.redirect("/profil");
+  })
+  .catch(function (err) {
+    return next(err);
+  });
+
+
 }
 
 
