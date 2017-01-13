@@ -156,6 +156,8 @@ create view vue_mesures as
 		s.prenom_medecin as prenom_medecin,
 		s.nom_patient as nom_patient,
 		s.prenom_patient as prenom_patient,
+		s.username_patient as username_patient,
+		s.username_medecin as username_medecin,
 		m.debut_acquisition as debut_acquisition,
 		m.fin_acquisition as fin_acquisition
 	from mesures m
@@ -169,6 +171,8 @@ create view vue_deploiement as
 		m.prenom_medecin as prenom_medecin,
 		m.nom_patient as nom_patient,
 		m.prenom_patient as prenom_patient,
+		m.username_medecin as username_medecin,
+		m.username_patient as username_patient,
 		c.type as type,
 		p.label as label,
 		d.frequence as frequence,
@@ -218,9 +222,9 @@ grant select on vue_suivis to patient;
 grant select on vue_deploiement to patient;
 grant select on vue_login to patient;
 
-grant select, insert on patients to medecin;
 grant select on medecins to medecin;
 grant select, insert on donnees to medecin;
 grant select on vue_suivis to medecin;
 grant select on vue_deploiement to medecin;
 grant select on vue_login to medecin;
+/*GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public to medecin;*/

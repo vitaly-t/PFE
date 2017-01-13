@@ -59,35 +59,73 @@ function medecins(req, res, next) {
 
 
 function suivis(req, res, next) {
-  db.any({
-    name: "getAllSuivis",
-    text: "select * from vue_suivis",
-  })
-    .then(function (data) {
-      console.log('Récupération des données suivis')
-      console.log('Nombre de suivis : ')
-      console.log(data.length);
-      res.render('suivis', { title: 'LUL', max: data.length, tab: data});
+  if (req.session.user == 'lalanne'){
+    db.any({
+      name: "getAllSuivisAdmin",
+      text: "select * from vue_suivis"
     })
-    .catch(function (err) {
-      return next(err);
-    });
+      .then(function (data) {
+        console.log('Récupération des données suivis')
+        console.log('Nombre de suivis : ')
+        console.log(data.length);
+        res.render('suivis', { title: 'LUL', max: data.length, tab: data});
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  }
+  else{
+    db.any({
+      name: "getAllSuivis",
+      text: "select * from vue_suivis where username_patient = $1 or username_medecin=$2",
+      values: [req.session.user, req.session.user]
+    })
+      .then(function (data) {
+        console.log('Récupération des données suivis')
+        console.log('Nombre de suivis : ')
+        console.log(data.length);
+        res.render('suivis', { title: 'LUL', max: data.length, tab: data});
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  }
 }
 
+
+
 function deploiements(req, res, next) {
-  db.any({
-    name: "getAllDeploiements",
-    text: "select * from vue_deploiement"
-  })
-    .then(function (data) {
-      console.log('Récupération des données de déploiements')
-      console.log('Nombre de déploiements : ')
-      console.log(data.length);
-      res.render('deploiements', { title: 'LUL', max: data.length, tab: data});
+  if (req.session.user == 'lalanne'){
+    db.any({
+      name: "getAllDeploiements",
+      text: "select * from vue_deploiement"
     })
-    .catch(function (err) {
-      return next(err);
-    });
+      .then(function (data) {
+        console.log('Récupération des données de déploiements')
+        console.log('Nombre de déploiements : ')
+        console.log(data.length);
+        res.render('deploiements', { title: 'LUL', max: data.length, tab: data});
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  }
+  else{
+    db.any({
+      name: "getAllDeploiements",
+      text: "select * from vue_deploiement where username_patient = $1 or username_medecin=$2",
+      values: [req.session.user, req.session.user]
+    })
+      .then(function (data) {
+        console.log('Récupération des données de déploiements')
+        console.log('Nombre de déploiements : ')
+        console.log(data.length);
+        res.render('deploiements', { title: 'LUL', max: data.length, tab: data});
+      })
+      .catch(function (err) {
+        return next(err);
+      });
+  }
 }
 
 
@@ -137,19 +175,30 @@ function profil(req, res, next) {
 
 function ajout(req, res, next) {
   console.log(req.body);
+  var nom = req.body.nom;
+  var prenom = req.body.prenom;
+  var sexe = req.body.sexe;
+  var naissance = req.body.naissance;
+  var pathologie = req.body.pathologie;
+  var username = req.body.username;
+  var password = req.body.password;
 
-  db.none({
-    name: "importPatient",
-    text: "insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ($1, $2, $3, $4, $5, $6);",
-    values: [req.body.nom, req.body.prenom, req.body.sexe, req.body.naissance, req.body.pathologie, req.body.username]
+  db.task(t=> {
+    return t.batch([
+      db.none({
+        name: "importPatient",
+        text: "insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ($1, $2, $3, $4, $5, $6)",
+        values: [nom, prenom, sexe, naissance, pathologie, username]
+      }),
+      db.any("create user $1::string with inherit password $2 in role medecin",username)
+    ]);
   })
-  .then(function () {
+  .then(data=> {
     res.redirect("/profil");
   })
   .catch(function (err) {
     return next(err);
   });
-
 
 }
 
