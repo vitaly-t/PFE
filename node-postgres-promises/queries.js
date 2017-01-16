@@ -190,7 +190,11 @@ function ajout(req, res, next) {
         text: "insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ($1, $2, $3, $4, $5, $6)",
         values: [nom, prenom, sexe, naissance, pathologie, username]
       }),
-      db.any("create user $1::string with inherit password $2 in role medecin",username)
+      db.any({
+        name: "createUser",
+        text: "create user $1 with inherit password $2 in role medecin",
+        values:[username, password]
+      })
     ]);
   })
   .then(data=> {
