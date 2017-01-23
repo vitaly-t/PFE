@@ -97,7 +97,7 @@ function suivis(req, res, next) {
 function deploiements(req, res, next) {
   if (req.session.user == 'lalanne'){
     db.any({
-      name: "getAllDeploiements",
+      name: "getAllDeploiementsAdmin",
       text: "select * from vue_deploiement"
     })
       .then(function (data) {

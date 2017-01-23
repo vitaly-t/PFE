@@ -49,9 +49,7 @@ router.get('/ajout', function(req, res, next) {
 router.post('/ajout', [requireLogin],dbfct.ajout);
 
 
-router.get('/importation', function(req, res, next) {
-  res.render('importation', { title: 'LUL' });
-});
+router.get('/importation', [requireLogin], importfct.formImport);
 router.post('/upload', upload.single('fichier'), importfct.importDonnees);
 
 router.post('/graphiques', [requireLogin],graphfct.graphiques);

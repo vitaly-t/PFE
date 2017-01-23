@@ -14,7 +14,22 @@ var options = {
 
 var csvStream = csv.createStream(options);
 
-
+function formImport(req, res, next){
+  db.any({
+    name: "getAllDeploiements",
+    text: "select * from vue_deploiement where username_patient = $1 or username_medecin=$2",
+    values: [req.session.user, req.session.user]
+  })
+    .then(function (data) {
+      console.log('Récupération des données de déploiements')
+      console.log('Nombre de déploiements : ')
+      console.log(data.length);
+      res.render('importation', { title: 'LUL', max: data.length, tab: data });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
 
 function importDonnees(req, res, next) {
   console.log('File Uploaded :');
@@ -53,7 +68,7 @@ function importDonnees(req, res, next) {
            // outputs the column name associated with the value found
           //console.log('#' + key + ' = ' + value);
        })
-       
+
        console.log('File Imported into DB');
        res.render('upload', { title: 'LUL' })
 }
@@ -61,5 +76,6 @@ function importDonnees(req, res, next) {
 
 
 module.exports = {
-  importDonnees: importDonnees,
+  formImport: formImport,
+  importDonnees: importDonnees
 };
