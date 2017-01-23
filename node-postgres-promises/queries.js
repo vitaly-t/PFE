@@ -147,7 +147,7 @@ function donnees(req, res, next) {
 
 function accueil(req, res, next) {
   req.session.index = (req.session.index || 0) + 1;
-  res.render('index', {title: 'LUL', sessID: req.sessionID, user: req.session.user, password: req.session.password , index: req.session.index})
+  res.render('index', {title: 'LUL', user: req.session.user, index: req.session.index})
 }
 
 function profil(req, res, next) {
