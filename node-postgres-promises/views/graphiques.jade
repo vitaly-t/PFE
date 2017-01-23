@@ -4,7 +4,7 @@ block content
   h1.page-header Graphiques
   form(action='/graphiques', method='GET')
     p ID de déploiement :
-    input(type='radio', name='id_deploiement', value=1)
+    input(type='radio', name='id_deploiement', required='', value=1)
     | 1
     input(type='radio', name='id_deploiement', value=2)
     | 2
@@ -20,6 +20,7 @@ block content
     | 7
     br
     button Choisir
+  br
   p ROSE : Accélération en X (axe antéro-postérieur)
   p BLEU : Accélération en Y (axe longitudinal)
   p JAUNE : Accélération en Z (axe transversal)

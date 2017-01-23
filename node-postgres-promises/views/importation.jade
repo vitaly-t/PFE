@@ -4,7 +4,7 @@ block content
   h1.page-header Importations
   form(action='/upload', method='POST', enctype='multipart/form-data')
     p ID de déploiement :
-    input(type='radio', name='id_deploiement', value=1)
+    input(type='radio', name='id_deploiement', required='', value=1)
     | 1
     input(type='radio', name='id_deploiement', value=2)
     | 2
@@ -20,5 +20,5 @@ block content
     | 7
     br
     p Selectionez un fichier de données à importer :
-    input(type='file', name='fichier')
+    input(type='file', name='fichier', required='', accept='.csv')
     button Télécharger

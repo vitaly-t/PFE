@@ -1,5 +1,6 @@
 # PFE
 
+Développement d’une base de données et application web sécurisées dans le domaine de la réadaptation de patients neurologiques
 
 ###Lancer le serveur :
 1. `$ cd PFE/node-postgres-promises`
