@@ -22,7 +22,7 @@ var datatemps4 = [], datax4 = [], datay4 = [], dataz4 = [];
   db.any({
     name: "graphs",
     text: "select * from donnees where id_deploiement = $1",
-    values: [req.param("id_deploiement")]
+    values: [req.body.id_deploiement]
   })
     .then(function (data) {
       var max = data.length;
@@ -254,7 +254,7 @@ var datatemps4 = [], datax4 = [], datay4 = [], dataz4 = [];
 
 
 
-      res.render('graphiques', {title: 'LUL'});
+      res.render('graphs', {title: 'LUL'});
     })
 
     .catch(function (err) {
