@@ -12,7 +12,7 @@ function graphiques(req, res, next) {
   , fs = require('fs')
 
 console.log('ID de déploiement :')
-console.log(req.param("id_deploiement"))
+console.log(req.body.id_deploiement)
 
 var datatemps = [], datax = [], datay = [], dataz = [];
 var datatemps2 = [], datax2 = [], datay2 = [], dataz2 = [];
