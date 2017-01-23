@@ -53,9 +53,7 @@ router.get('/importation', [requireLogin], importfct.formImport);
 router.post('/upload', upload.single('fichier'), importfct.importDonnees);
 
 router.post('/graphiques', [requireLogin],graphfct.graphiques);
-router.get('/graphiques', function(req, res, next) {
-  res.render('graphiques', { title: 'LUL' });
-});
+router.get('/graphiques', [requireLogin],graphfct.formGraphs);
 
 
 router.get('/api/patients', apifct.getAllPatients);

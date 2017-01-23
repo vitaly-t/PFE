@@ -1,3 +1,23 @@
+function formGraphs(req, res, next) {
+  db.any({
+    name: "getAllDeploiements",
+    text: "select * from vue_deploiement where username_patient = $1 or username_medecin=$2",
+    values: [req.session.user, req.session.user]
+  })
+    .then(function (data) {
+      console.log('Récupération des données de déploiements')
+      console.log('Nombre de déploiements : ')
+      console.log(data.length);
+      res.render('graphiques', { title: 'LUL', max: data.length, tab: data });
+    })
+    .catch(function (err) {
+      return next(err);
+    });
+}
+
+
+
+
 function graphiques(req, res, next) {
   var Canvas = require('canvas')
   , canvas1 = new Canvas(4000, 4000)
@@ -254,7 +274,7 @@ var datatemps4 = [], datax4 = [], datay4 = [], dataz4 = [];
 
 
 
-      res.render('graphs', {title: 'LUL'});
+      res.render('graphs', {title: 'LUL', id_deploiement: req.body.id_deploiement});
     })
 
     .catch(function (err) {
@@ -264,5 +284,6 @@ var datatemps4 = [], datax4 = [], datay4 = [], dataz4 = [];
 
 
   module.exports = {
+    formGraphs: formGraphs,
     graphiques: graphiques
   };
