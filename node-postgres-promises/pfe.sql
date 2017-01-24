@@ -72,7 +72,7 @@ create table donnees (
 );
 
 
-insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('Soule', 'Clothilde', 'F', '1994-01-23', 'parkinson', 'clothilde32');
+insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('Soule', 'Clothilde', 'F', '23-01-1994', 'parkinson', 'clothilde32');
 insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('Flores', 'Thelma', 'F', '28-2-1994', 'parkinson', 'thelma26');
 insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('Friry', 'Anna', 'F', '28-2-1994', 'fracture', 'anna69');
 insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ('Desmurs', 'Diane', 'F', '23-2-1994', 'fracture', 'diane69');

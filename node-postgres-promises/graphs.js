@@ -31,6 +31,7 @@ function graphiques(req, res, next) {
   , Chart = require('nchart')
   , fs = require('fs')
 
+
 console.log('ID de déploiement :')
 console.log(req.body.id_deploiement)
 
