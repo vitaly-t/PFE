@@ -7,24 +7,20 @@ block content
   p ROSE : Accélération en X (axe antéro-postérieur)
   p BLEU : Accélération en Y (axe longitudinal)
   p JAUNE : Accélération en Z (axe transversal)
-  +nav-tabs-justified([{text:"Début d'acquisition",href:"#debut"},{text:"Fin d'acquisition",href:"#fin"},{text:"Milieu d'acquisition",href:"#milieu"}, {text:"Acquisition complète",href:"#complete"}],0)
-  section#debut
-    h2 Début de l'acquisition :
-    br
-    img(src='/images/graph2.png', alt='GRAPH2')
-  br
-  section#fin
-    h2 Fin de l'acquisition :
-    br
-    img(src='/images/graph3.png', alt='GRAPH3')
-  br
-  section#milieu
-    h2 Milieu d'acquisition :
-    br
-    img(src='/images/graph4.png', alt='GRAPH4')
-  br
-  section#complete
-    h2 Graphique général :
-    br
-    img(src='/images/graph1.png', alt='GRAPH1')
-  br
+  +tab-list(["Début","Fin","Milieu","Général"],0)
+   +tab("Début","active")
+     h1 Début d'acquisition
+     br
+     img(src='/images/graph2.png', alt='GRAPH2')
+   +tab("Fin")
+     h1 Fin d'acquisition
+     br
+     img(src='/images/graph3.png', alt='GRAPH3')
+   +tab("Milieu")
+     h1 Milieu d'acquisition
+     br
+     img(src='/images/graph4.png', alt='GRAPH4')
+   +tab("Général")
+     h1 Graphique général
+     br
+     img(src='/images/graph1.png', alt='GRAPH1')
