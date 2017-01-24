@@ -10,7 +10,7 @@ dbuser = 'undefined'
 dbpassword = 'undefined'
 
 var pgp = require('pg-promise')(options);
-//var connectionString = 'postgres://localhost:5432/pfe';
+
 config = {
   host: 'localhost',
   port: 5432,

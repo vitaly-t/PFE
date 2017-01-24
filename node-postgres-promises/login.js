@@ -39,8 +39,9 @@ function auth(req, res, next){
         res.redirect("/");
       })
       .catch(function (err) {
-        console.log(err)
-        return next(err);
+        options.error='Ces login/mot de passe ne sont pas OK';
+        res.render('login', options);
+        //return next(err);
       });
   }
 }
