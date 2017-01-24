@@ -42,7 +42,7 @@ function importDonnees(req, res, next) {
               return res.end(req.fileValidationError);
         }
 
-    var path = '/home/lalanne/PFE/PFE/node-postgres-promises/' + req.file.path
+    var path = req.file.path
     console.log('PATH:' + path)
     fs.createReadStream(path).pipe(csvStream)
        .on('error',function(err){
