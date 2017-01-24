@@ -20,8 +20,20 @@ var importfct = require('../import')
 
 function requireLogin (req, res, next) {
   if (req.session.user && req.session.password) {
-    // User is authenticated, let him in
-    next();
+    if ((req.session.user == 'undefined')||(config.user == 'undefined'))
+    {
+      console.log('REDIRECT')
+      console.log(req.session.user)
+      console.log(req.session.password)
+      res.redirect("/login");
+    }
+    else {
+      // User is authenticated, let him in
+      console.log('NEXT')
+      console.log(req.session.user)
+      console.log(req.session.password)
+      next();
+    }
   } else {
     // Otherwise, we redirect him to login form
     res.redirect("/login");
