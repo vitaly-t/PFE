@@ -49,7 +49,7 @@ router.get('/suivis',[requireLogin], dbfct.suivis);
 router.get('/deploiements', [requireLogin],dbfct.deploiements);
 router.get('/donnees', [requireLogin],dbfct.donnees);
 
-router.get('/ajout', function(req, res, next) {
+router.get('/ajout', [requireLogin], function(req, res, next) {
   res.render('ajout', { title: 'LUL' });
 });
 router.post('/ajout', [requireLogin],dbfct.ajout);
@@ -62,18 +62,18 @@ router.post('/graphiques', [requireLogin],graphfct.graphiques);
 router.get('/graphiques', [requireLogin],graphfct.formGraphs);
 
 
-router.get('/api/patients', apifct.getAllPatients);
-router.get('/api/patients/:id', apifct.getSinglePatient);
-router.post('/api/patients', apifct.createPatient);
-router.put('/api/patients/:id', apifct.updatePatient);
-router.delete('/api/patients/:id', apifct.removePatient);
-router.get('/api/medecins', apifct.getAllMedecins);
-router.get('/api/mesures', apifct.getAllMesures);
-router.get('/api/suivis', apifct.getAllSuivis);
-router.get('/api/placements', apifct.getAllPlacements);
-router.get('/api/capteurs', apifct.getAllCapteurs);
-router.get('/api/deploiements', apifct.getAllDeploiements);
-router.get('/api/donnees', apifct.getAllDonnees);
+router.get('/api/patients',[requireLogin], apifct.getAllPatients);
+router.get('/api/patients/:id',[requireLogin], apifct.getSinglePatient);
+router.post('/api/patients',[requireLogin], apifct.createPatient);
+router.put('/api/patients/:id',[requireLogin], apifct.updatePatient);
+router.delete('/api/patients/:id',[requireLogin], apifct.removePatient);
+router.get('/api/medecins',[requireLogin], apifct.getAllMedecins);
+router.get('/api/mesures',[requireLogin], apifct.getAllMesures);
+router.get('/api/suivis', [requireLogin],apifct.getAllSuivis);
+router.get('/api/placements',[requireLogin], apifct.getAllPlacements);
+router.get('/api/capteurs', [requireLogin],apifct.getAllCapteurs);
+router.get('/api/deploiements', [requireLogin],apifct.getAllDeploiements);
+router.get('/api/donnees',[requireLogin], apifct.getAllDonnees);
 
 
 
