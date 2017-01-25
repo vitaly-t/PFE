@@ -30,7 +30,7 @@ app.use(cookieParser());
 
 app.use(session({
   store: new pgSession({
-    conString: "postgres://lalanne:lucie1234@localhost:5432/login"
+    conString: "postgres://session:session@localhost:5432/login"
   }),
   secret: 'maclesecrete',
   resave: false,

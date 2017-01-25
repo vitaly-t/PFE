@@ -190,10 +190,11 @@ create view vue_login as
 	select username
 	from medecins;
 
-/*create user patient with inherit password 'patient';
-create user medecin with inherit password 'medecin';*/
+create user patient with inherit password 'patient';
+create user medecin with inherit password 'medecin';
+create user session with inherit password 'session';
 
-/*create user clothilde32 with inherit password 'coco' in role patient;
+create user clothilde32 with inherit password 'coco' in role patient;
 create user thelma26 with inherit password 'tete' in role patient;
 create user anna69 with inherit password 'anan' in role patient;
 create user diane69 with inherit password 'didi' in role patient;
@@ -204,7 +205,7 @@ create user theonarvalo with inherit password 'tete' in role medecin;
 create user loic75 with inherit password 'lolo' in role medecin;
 create user tommy with inherit password 'toto' in role medecin;
 create user antoine with inherit password 'anan' in role medecin;
-*/
+
 
 alter table patients enable row level security;
 create policy row_patients on patients for select

@@ -16,7 +16,15 @@ Développement d’une base de données et application web sécurisées dans le 
 
 Pour mettre en place la table session :
 
-`$ psql login < node_modules/connect-pg-simple/table.sql`
+1. `$ createdb login`
+
+2. `$ psql login < node_modules/connect-pg-simple/table.sql`
+
+3. `$ psql login`
+
+4. `login=# grant all privileges on table session to session;`
+
+
 
 
 ###Utiliser l'application :
@@ -43,7 +51,7 @@ Pour mettre en place la table session :
 
 2. `psql`
 
-3. `alter role lalanne with superuser`
+3. `alter role <nom_role> with superuser`
 
 
 ###Commandes git :
