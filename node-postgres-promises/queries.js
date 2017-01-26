@@ -185,12 +185,12 @@ function ajout(req, res, next) {
 
   db.task(t=> {
     return t.batch([
-      db.none({
+      t.none({
         name: "importPatient",
         text: "insert into patients (nom,prenom,sexe,naissance, pathologie, username) values ($1, $2, $3, $4, $5, $6)",
         values: [nom, prenom, sexe, naissance, pathologie, username]
       }),
-      db.any({
+      t.any({
         name: "createUser",
         text: "create user $1 with inherit password $2 in role medecin",
         values:[username, password]
